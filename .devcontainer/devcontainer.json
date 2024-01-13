@@ -1,0 +1,55 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/git": {
+			"version": "os-provided",
+			"ppa": "true"
+		},
+		"ghcr.io/devcontainers/features/python": {
+			"version": "os-provided",
+			"installTools": "true",
+			"optimize": "true",
+			"installPath": "/usr/local/python",
+			"installJupyterlab": "true",
+			"configureJupyterlabAllowOrigin": "",
+			"httpProxy": ""
+		},
+		"ghcr.io/devcontainers/features/powershell": {
+			"version": "latest",
+			"modules": ""
+		},
+		"ghcr.io/devcontainers/features/php": {
+			"version": "latest",
+			"installComposer": "true"
+		},
+		"ghcr.io/devcontainers/features/java": {
+			"version": "latest",
+			"jdkDistro": "oracle",
+			"installGradle": "false",
+			"gradleVersion": "latest",
+			"installMaven": "true",
+			"mavenVersion": "latest",
+			"installAnt": "true",
+			"antVersion": "latest"
+		}
+	}
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "yarn install",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
