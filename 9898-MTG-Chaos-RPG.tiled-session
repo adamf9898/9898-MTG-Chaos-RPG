@@ -1,0 +1,699 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "pics/Tiles Sprites",
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map/main_story",
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset",
+        "G:/forge-git/forge-gui/res/adventure/common/maps",
+        "res/adventure/Shandalar/maps",
+        "res/adventure/Shandalar",
+        "G:/forge-git/forge-gui/res/adventure/common/maps/map/main_story",
+        ".",
+        "G:/Forge-Adventure/res/adventure/Shandalar",
+        "G:/forge-git/forge-gui/res/adventure/common/maps/obj",
+        "res/adventure/Shandalar/maps/tileset",
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map",
+        "res/adventure/Shandalar/maps/map/main_story",
+        "G:/Forge-Adventure/res/adventure",
+        "G:/Forge-Adventure/res",
+        "pics/Boards",
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps",
+        "res/adventure",
+        "G:/Forge-Adventure",
+        "G:/forge-git/forge-gui/res/adventure/common/maps/map",
+        "res/adventure/Shandalar/maps/obj",
+        "res"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "#9898-MTG-Chaos-RPG": {
+            "dynamicWrapping": true
+        },
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Fitness On Demand/Documents/MTG-Forge/forge-gui/res/adventure/common/maps/map/_template.tmx": {
+            "scale": 0.9282291666666667,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 173.98720682302772,
+                "y": 160.520704746942
+            }
+        },
+        "C:/Users/Fitness On Demand/Documents/MTG-Forge/forge-gui/res/adventure/common/maps/map/debug_map.tmx": {
+            "scale": 11,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 231.86363636363637,
+                "y": 391.90909090909093
+            }
+        },
+        "C:/Users/Fitness On Demand/Documents/MTG-Forge/forge-gui/res/adventure/common/maps/tileset/buildings-nocollide.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Fitness On Demand/Documents/MTG-Forge/forge-gui/res/adventure/common/maps/tileset/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Fitness On Demand/Documents/MTG-Forge/forge-gui/res/adventure/common/maps/tileset/main.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map/Tiles Sprites/9898-MTG-Chaos-RPG-Creatures.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map/Tiles Sprites/buildings.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map/Tiles Sprites/main.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map/main_story/spawn.tmx": {
+            "scale": 0.15536458333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1284.076433121019,
+                "y": 1313.0405631914182
+            }
+        },
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/res/adventure/Shandalar/maps/tileset/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/map/Tiles Sprites/9898-MTG-Chaos-RPG-Creatures.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/map/Tiles Sprites/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/map/Tiles Sprites/main.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/map/main_story/spawn.tmx": {
+            "scale": 0.17404296875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1284.1656379755357,
+                "y": 962.4060150375941
+            }
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/map/main_story/swamp_capital.tmx": {
+            "scale": 0.696171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 321.0414094938839,
+                "y": 321.041409493884
+            }
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/res/adventure/Shandalar/maps/tileset/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/tileset/buildings-nocollide.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/tileset/buildings.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/tileset/dungeon.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/Forge/res/adventure/Shandalar/maps/tileset/main.tsx": {
+            "scaleInDock": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/map/chaos.tmx": {
+            "scale": 0.8401562499999999,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 320.1785382183374,
+                "y": 241.02659475543987
+            }
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/map/main_story/spawn.tmx": {
+            "scale": 1.1202083333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.13390366375305,
+                "y": 240.58024920959645
+            }
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/map/skep/skep.tmx": {
+            "scale": 0.8094791666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 337.25389267790507,
+                "y": 240.27795650495432
+            }
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/map/wastetown..tmx": {
+            "scale": 0.8401562499999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.1785382183374,
+                "y": 208.88971545471455
+            }
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/Copperhost_Tiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/DrossPitTiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/FarmFood.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/FurnaceTiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/GitaxianTilesheet.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/buildings-nocollide.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/buildings.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/chips.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/dungeon.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/main-nocollide.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/main.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/phyrexiantiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/rivers-nocolide.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "G:/forge-git/forge-gui/res/adventure/common/maps/tileset/rivers.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Boards/spawn.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1404,
+                "y": 2260
+            }
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-All-But-Creatures.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-All.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Colors.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Creatures.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Currency.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Decks.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Default-Board.tmx": {
+            "expandedGroupLayers": [
+                12,
+                7
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 956,
+                "y": -504
+            }
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Default-Board.tmx#Forge Sprites": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 0.03125
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Default-Board.tmx#forge_sprite_ability": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Default-Board.tmx#sprite_ability": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Lands.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Masters (2).tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Masters.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx": {
+            "scale": 0.8876562499999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 192.07885935574723,
+                "y": 318.8171096637916
+            }
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx#all": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx#colors": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx#creatures": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx#decks": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx#lands": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx#masters": {
+            "scaleInDock": 1
+        },
+        "pics/Tiles Sprites/ALL.tmx": {
+            "scale": 0.21186079545454545,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 700.9319477036543,
+                "y": 783.5333556821992
+            }
+        },
+        "pics/Tiles Sprites/ALL.tmx#tiles": {
+            "scaleInDock": 0.03
+        },
+        "pics/Tiles Sprites/Chaos Board Bonus Cards.tmx": {
+            "scale": 0.8876562499999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 192.07885935574723,
+                "y": 321.0702341137124
+            }
+        },
+        "pics/Tiles Sprites/Colors.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/Currency.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/FarmFood.tsx": {
+            "scaleInDock": 1
+        },
+        "pics/Tiles Sprites/Forge Sprites.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.015625
+        },
+        "pics/Tiles Sprites/Marvel Contest of Champions.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 0.03
+        },
+        "pics/Tiles Sprites/Unmarked Boards/Unmarked Board 0001.tmx": {
+            "expandedGroupLayers": [
+                12,
+                7,
+                2
+            ],
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 12,
+                "y": 1560
+            }
+        },
+        "pics/Tiles Sprites/Unmarked Boards/Unmarked Board 0001.tmx#Currency": {
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/Unmarked Boards/Unmarked Board 0001.tmx#Emblem": {
+            "dynamicWrapping": true
+        },
+        "pics/Tiles Sprites/buildings.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.015625,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/dungeon.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/interior.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/main.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/shops.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pics/Tiles Sprites/world.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "res/adventure/Shandalar/maps/map/cave_10.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.1023958333333332,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240.83908154587547,
+                "y": 136.52083530189927
+            }
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0000_rpg_template.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1351.5151515151515,
+                "y": 2569.6969696969695
+            }
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0000_rpg_template.tmx#9898-MTG-Chaos-RPG": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0000_template.tmx": {
+            "scale": 0.8312499999999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.60150375939853,
+                "y": 240.60150375939853
+            }
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0001.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.0766666666666667,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 234.984520123839,
+                "y": 234.05572755417955
+            }
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0002.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.8312499999999999,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240.60150375939853,
+                "y": 240.60150375939853
+            }
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx": {
+            "scale": 0.8312499999999999,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.60150375939853,
+                "y": 240.60150375939853
+            }
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#Copperhost_Tiles": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#DrossPitTiles": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#FarmFood": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#FurnaceTiles": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#GitaxianTilesheet": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#Phyrexian_Buildings": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#autotiles": {
+            "scaleInDock": 0.75
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#buildings": {
+            "scaleInDock": 1.5
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#compass": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#dungeon": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.25
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#items": {
+            "scaleInDock": 0.75
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#main": {
+            "scaleInDock": 0.5
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#map_marker": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#map_sprites": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#phyrexiantiles": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#pixelmana": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#portals": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#rivers": {
+            "scaleInDock": 1.5
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#spells": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#structures": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos/chaos_0003.tmx#treasure": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/chaos_1.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 29.99999999999997,
+                "y": 346
+            }
+        },
+        "res/adventure/Shandalar/maps/map/crawlspace.tmx": {
+            "scale": 1.175625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 185.85858585858585,
+                "y": 136.09782030834666
+            }
+        },
+        "res/adventure/Shandalar/maps/map/debug_map.tmx": {
+            "scale": 0.9203125,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 318.91341256366724,
+                "y": 237.9626485568761
+            }
+        },
+        "res/adventure/Shandalar/maps/map/main_story/chaos_0001.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 251,
+                "y": 284
+            }
+        },
+        "res/adventure/Shandalar/maps/map/main_story/spawn.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 252.5,
+                "y": 242
+            }
+        },
+        "res/adventure/Shandalar/maps/map/tileset/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/map/tileset/main.tsx": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/9898-MTG-Chaos-RPG-All.tsx": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/9898-MTG-Chaos-RPG.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/9898_MTG.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/backgrounds.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/buildings-nocollide.tsx": {
+            "scaleInDock": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/buildings.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "res/adventure/Shandalar/maps/tileset/main.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-All-But-Creatures.tsx": {
+            "scaleInDock": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-All.tsx": {
+            "scaleInDock": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-Colors.tsx": {
+            "scaleInDock": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-Creatures.tsx": {
+            "scaleInDock": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-Decks.tsx": {
+            "scaleInDock": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-Lands.tsx": {
+            "scaleInDock": 1
+        },
+        "res/pics/Tiles Sprites/9898-MTG-Chaos-RPG-Masters.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "frame.defaultDuration": 3000,
+    "last.executablePath": "C:/Notepad++Portable/App/Notepad++/notepad++.exe",
+    "last.externalTilesetPath": "G:/Forge-Adventure/9898-MTG-Chaos-RPG/pics/Tiles Sprites",
+    "last.imagePath": "G:/Forge-Adventure/9898-MTG-Chaos-RPG/pics/Extras/Marvel Contest of Champions",
+    "last.objectTemplatePath": "G:/Forge-Adventure/res/adventure/Shandalar/maps/obj",
+    "last.workingDirectory": "G:/Forge-Adventure/9898-MTG-Chaos-RPG/9898-MTG-Chaos-RPG",
+    "last.worldFilePath": "G:/Forge-Adventure/9898-MTG-Chaos-RPG",
+    "loadedWorlds": [
+        "G:/Forge-Adventure/9898-MTG-Chaos-RPG/9898-MTG-Chaos-RPG.world"
+    ],
+    "map.height": 15,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 128,
+    "map.tileWidth": 128,
+    "map.width": 20,
+    "openFiles": [
+    ],
+    "project": "9898-MTG-Chaos-RPG.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "G:/Forge-Adventure/res/adventure/Shandalar/maps/map/main_story/spawn.tmx",
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Default-Board.tmx",
+        "pics/Tiles Sprites/Unmarked Boards/Unmarked Board 0001.tmx",
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-All-But-Creatures.tsx",
+        "pics/Tiles Sprites/main.tsx",
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Colors.tsx",
+        "pics/Tiles Sprites/Marvel Contest of Champions.tsx",
+        "pics/Tiles Sprites/9898-MTG-Chaos-RPG.tmx",
+        "pics/Tiles Sprites/world.tsx",
+        "pics/Tiles Sprites/Chaos Board Bonus Cards.tmx",
+        "pics/Tiles Sprites/dungeon.tsx",
+        "pics/Tiles Sprites/ALL.tmx"
+    ],
+    "textEdit.monospace": false,
+    "tileset.embedInMap": false,
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 1
+}

@@ -1,0 +1,13 @@
+{
+    "maps": [
+        {
+            "fileName": "pics/Tiles Sprites/9898-MTG-Chaos-RPG-Default-Board.tmx",
+            "height": 1280,
+            "width": 1920,
+            "x": 0,
+            "y": 0
+        }
+    ],
+    "onlyShowAdjacentMaps": false,
+    "type": "world"
+}
