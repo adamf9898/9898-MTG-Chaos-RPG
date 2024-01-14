@@ -269,16 +269,14 @@ function pickItems(n) {
 <p><img width=480 height=272 src="https://i.imgur.com/YMRbEVU.png"></p>
 
 <p><b>Inventory:<br>
-<button onclick="window.histogram = {}; pickItems(0)">Refresh</button>
+<button onclick="window.histogram = {}; pickItems(0)">Refresh</button> | <button onclick="window.histogram = {}; pickItems(1)">Random 1</button><br>
 <p>
 Mana Link = 10<br>
 Haggler's Amulet = 2<br>
-Energy Points = 2<br>
-Experience Points = 0<br>
-<button onclick="window.histogram = {};
-pickItems(1)">Random 1</button><br></p>
-  
-  
-[ai(output)]
-<br><br>
-[image(prompt)]
+Energy = 2<br>
+Experience = 0<br>
+</p>
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<p>[tldraw(tldrawOptions)]</p>
+<p>[ai(output)]</p>
+<p>[image(prompt)]</p>
