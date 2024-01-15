@@ -17,3 +17,7 @@ Discord: https://discord.gg/b4txcrRZ8t
 
 Original: https://steamcommunity.com/sharedfiles/filedetails/?id=2601677731&searchtext=mtg+rpg
 Thanks to https://steamcommunity.com/profiles/76561198045776458/myworkshopfiles/?appid=286160
+
+
+<hr
+https://message.style/app/editor/share/CdUO7zot>
