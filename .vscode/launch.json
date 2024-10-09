@@ -4,17 +4,17 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
+        mtgChaosRPG
 
         {
-            "name": "Kubernetes: Run/Debug",
-            "type": "cloudcode.kubernetes",
+            "name": "9898-MTG-Chaos-RPG",
+            "type": "Custom Magic: the Gathering Format",
             "request": "launch",
-            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
-            "watch": true,
-            "cleanUp": true,
-            "portForward": true
-        },
-
+            "script": "${workspaceFolder}/9898-MTG-Chaos-RPG/launch.json",
+            "": "",
+        }
+        
         python
 
         {
