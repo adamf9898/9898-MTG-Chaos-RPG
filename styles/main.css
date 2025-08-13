@@ -1,0 +1,412 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.game-header {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ffd700;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.game-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn, .action-btn {
+    background: linear-gradient(45deg, #4a5568, #2d3748);
+    border: 2px solid #ffd700;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.nav-btn:hover, .action-btn:hover {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a2e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+}
+
+.nav-btn:active, .action-btn:active {
+    transform: translateY(0);
+}
+
+/* Game Container */
+.game-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 1rem;
+    padding: 1rem;
+    min-height: calc(100vh - 80px);
+}
+
+/* Status Panel */
+.status-panel {
+    grid-row: 1 / -1;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid #4a5568;
+}
+
+.boss-info h2 {
+    color: #ff6b6b;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.boss-health {
+    margin-bottom: 2rem;
+}
+
+.health-bar {
+    background: #2d3748;
+    border: 2px solid #4a5568;
+    border-radius: 20px;
+    height: 20px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+}
+
+.health-fill {
+    background: linear-gradient(90deg, #ff6b6b, #ffa726);
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.party-info h3 {
+    color: #4fc3f7;
+    margin-bottom: 1rem;
+}
+
+.party-members {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Game Board */
+.game-board {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid #4a5568;
+}
+
+.encounter-area {
+    margin-bottom: 2rem;
+}
+
+.encounter-area h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.encounter-display {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 100px;
+    font-size: 1.1rem;
+}
+
+.battlefield-section h4 {
+    color: #a5d6a7;
+    margin-bottom: 1rem;
+}
+
+.card-zone {
+    min-height: 120px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px dashed #4a5568;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.card-zone.hand-zone {
+    justify-content: center;
+}
+
+/* Player Area */
+.player-area {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid #4a5568;
+}
+
+.hand-area h3 {
+    color: #81c784;
+    margin-bottom: 1rem;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Card Styles */
+.mtg-card {
+    width: 100px;
+    height: 140px;
+    background: linear-gradient(135deg, #2d3748, #4a5568);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+}
+
+.mtg-card:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 215, 0, 0.4);
+    z-index: 10;
+}
+
+.mtg-card .card-name {
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    color: #ffd700;
+    text-align: center;
+}
+
+.mtg-card .card-cost {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+.mtg-card .card-type {
+    font-size: 0.6rem;
+    color: #a0a0a0;
+    margin-bottom: 4px;
+}
+
+.mtg-card .card-text {
+    flex-grow: 1;
+    font-size: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mtg-card .card-power-toughness {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #ffd700;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #ffed4e;
+}
+
+/* Loading Indicator */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.loading.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #4a5568;
+    border-top: 4px solid #ffd700;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    
+    .status-panel {
+        grid-row: 1;
+    }
+    
+    .game-header {
+        padding: 1rem;
+    }
+    
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main-nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .nav-btn, .action-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mtg-card {
+        width: 80px;
+        height: 112px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+button:focus, .mtg-card:focus {
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .game-header {
+        background: #000000;
+    }
+    
+    .nav-btn, .action-btn {
+        background: #000000;
+        border: 3px solid #ffffff;
+    }
+    
+    .nav-btn:hover, .action-btn:hover {
+        background: #ffffff;
+        color: #000000;
+    }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "9898-mtg-chaos-rpg",
+  "version": "1.0.0",
+  "description": "Custom MTG Format - Chaos RPG for Tabletop Simulator with web interface",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run serve",
+    "dev": "npm run serve",
+    "build": "echo 'Static site - no build required'",
+    "test": "node tests/core.test.js",
+    "lint": "echo 'Linting - consider adding ESLint for future development'",
+    "serve": "python3 -m http.server 8000",
+    "serve:node": "npx http-server . -p 8000 -c-1"
+  },
+  "keywords": [
+    "magic-the-gathering",
+    "mtg",
+    "rpg",
+    "chaos",
+    "tabletop-simulator",
+    "scryfall",
+    "perchance",
+    "game"
+  ],
+  "author": "9898-MTG",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
