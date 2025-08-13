@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9898-MTG Chaos RPG</title>
+    <meta name="description" content="Custom MTG Format - Chaos RPG for cooperative gameplay">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://api.scryfall.com">
+</head>
+<body>
+    <header class="game-header">
+        <h1>🎴 9898-MTG Chaos RPG</h1>
+        <nav class="main-nav">
+            <button id="new-game-btn" class="nav-btn">New Game</button>
+            <button id="load-game-btn" class="nav-btn">Load Game</button>
+            <button id="settings-btn" class="nav-btn">Settings</button>
+            <button id="help-btn" class="nav-btn">Help</button>
+        </nav>
+    </header>
+
+    <main class="game-container">
+        <!-- Game Status Panel -->
+        <section class="status-panel" role="region" aria-label="Game Status">
+            <div class="boss-info">
+                <h2 id="current-boss">Select Boss</h2>
+                <div class="boss-health">
+                    <span>Health: </span>
+                    <div class="health-bar">
+                        <div id="boss-health-fill" class="health-fill" style="width: 100%"></div>
+                    </div>
+                    <span id="boss-health-text">100/100</span>
+                </div>
+            </div>
+            
+            <div class="party-info">
+                <h3>Party Status</h3>
+                <div id="party-members" class="party-members">
+                    <!-- Dynamic player cards will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Board -->
+        <section class="game-board" role="region" aria-label="Game Board">
+            <div class="encounter-area">
+                <h3>Current Encounter</h3>
+                <div id="encounter-display" class="encounter-display">
+                    <p>Click "New Game" to begin your adventure!</p>
+                </div>
+            </div>
+
+            <div class="battlefield">
+                <div class="battlefield-section" id="creatures-area">
+                    <h4>Battlefield</h4>
+                    <div class="card-zone" id="battlefield-zone">
+                        <!-- Creature cards will appear here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Player Hand & Actions -->
+        <section class="player-area" role="region" aria-label="Player Area">
+            <div class="hand-area">
+                <h3>Hand</h3>
+                <div id="player-hand" class="card-zone hand-zone">
+                    <!-- Player's hand cards will appear here -->
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="draw-card-btn" class="action-btn">Draw Card</button>
+                <button id="end-turn-btn" class="action-btn">End Turn</button>
+                <button id="use-ability-btn" class="action-btn">Use Ability</button>
+                <button id="explore-btn" class="action-btn">Explore</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="card-modal" class="modal" aria-hidden="true" role="dialog">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <div id="card-details" class="card-details">
+                <!-- Card details will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal" aria-hidden="true" role="dialog">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <h2>Game Settings</h2>
+            <form id="settings-form">
+                <label>
+                    <input type="checkbox" id="auto-tap-lands"> Auto-tap lands
+                </label>
+                <label>
+                    <input type="checkbox" id="show-card-previews" checked> Show card previews
+                </label>
+                <label>
+                    Sound Volume: <input type="range" id="volume-slider" min="0" max="100" value="50">
+                </label>
+                <button type="submit">Save Settings</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading" aria-hidden="true">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
