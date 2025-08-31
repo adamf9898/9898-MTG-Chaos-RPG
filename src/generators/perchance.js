@@ -91,6 +91,18 @@ class PerchanceGenerator {
             ]
         });
 
+        // Boss Abilities
+        this.addGenerator('bossAbility', {
+            weight: 1,
+            items: [
+                "Reality Rift", "Chaos Storm", "Void Manipulation", "Time Fracture",
+                "Mana Drain", "Planar Summon", "Elemental Fury", "Soul Harvest",
+                "Dimensional Tear", "Energy Overload", "Mind Control", "Death Aura",
+                "Lightning Storm", "Fire Nova", "Ice Prison", "Earthquake",
+                "Spell Reflection", "Magic Immunity", "Phase Shift", "Berserker Rage"
+            ]
+        });
+
         // Loot Generation
         this.addGenerator('treasure', {
             weight: 1,

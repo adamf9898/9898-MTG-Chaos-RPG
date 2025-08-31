@@ -20,62 +20,287 @@
     </header>
 
     <main class="game-container">
-        <!-- Game Status Panel -->
-        <section class="status-panel" role="region" aria-label="Game Status">
-            <div class="boss-info">
-                <h2 id="current-boss">Select Boss</h2>
-                <div class="boss-health">
-                    <span>Health: </span>
-                    <div class="health-bar">
-                        <div id="boss-health-fill" class="health-fill" style="width: 100%"></div>
-                    </div>
-                    <span id="boss-health-text">100/100</span>
-                </div>
-            </div>
-            
-            <div class="party-info">
-                <h3>Party Status</h3>
-                <div id="party-members" class="party-members">
-                    <!-- Dynamic player cards will be inserted here -->
-                </div>
-            </div>
-        </section>
+        <!-- Forum Tab Navigation -->
+        <nav class="forum-tabs" role="tablist">
+            <button class="tab-btn active" data-tab="game" role="tab" aria-selected="true">Game</button>
+            <button class="tab-btn" data-tab="forum" role="tab" aria-selected="false">Forum</button>
+            <button class="tab-btn" data-tab="deck-builder" role="tab" aria-selected="false">Deck Builder</button>
+            <button class="tab-btn" data-tab="turn-structure" role="tab" aria-selected="false">Turn Structure</button>
+            <button class="tab-btn" data-tab="membership" role="tab" aria-selected="false">Membership</button>
+        </nav>
 
-        <!-- Game Board -->
-        <section class="game-board" role="region" aria-label="Game Board">
-            <div class="encounter-area">
-                <h3>Current Encounter</h3>
-                <div id="encounter-display" class="encounter-display">
-                    <p>Click "New Game" to begin your adventure!</p>
-                </div>
-            </div>
-
-            <div class="battlefield">
-                <div class="battlefield-section" id="creatures-area">
-                    <h4>Battlefield</h4>
-                    <div class="card-zone" id="battlefield-zone">
-                        <!-- Creature cards will appear here -->
+        <!-- Game Tab Content -->
+        <div id="game-tab" class="tab-content active" role="tabpanel">
+            <!-- Game Status Panel -->
+            <section class="status-panel" role="region" aria-label="Game Status">
+                <div class="boss-info">
+                    <h2 id="current-boss">Select Boss</h2>
+                    <div class="boss-health">
+                        <span>Health: </span>
+                        <div class="health-bar">
+                            <div id="boss-health-fill" class="health-fill" style="width: 100%"></div>
+                        </div>
+                        <span id="boss-health-text">100/100</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Player Hand & Actions -->
-        <section class="player-area" role="region" aria-label="Player Area">
-            <div class="hand-area">
-                <h3>Hand</h3>
-                <div id="player-hand" class="card-zone hand-zone">
-                    <!-- Player's hand cards will appear here -->
+                
+                <div class="party-info">
+                    <h3>Party Status</h3>
+                    <div id="party-members" class="party-members">
+                        <!-- Dynamic player cards will be inserted here -->
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="action-buttons">
-                <button id="draw-card-btn" class="action-btn">Draw Card</button>
-                <button id="end-turn-btn" class="action-btn">End Turn</button>
-                <button id="use-ability-btn" class="action-btn">Use Ability</button>
-                <button id="explore-btn" class="action-btn">Explore</button>
-            </div>
-        </section>
+            <!-- Game Board -->
+            <section class="game-board" role="region" aria-label="Game Board">
+                <div class="encounter-area">
+                    <h3>Current Encounter</h3>
+                    <div id="encounter-display" class="encounter-display">
+                        <p>Click "New Game" to begin your adventure!</p>
+                    </div>
+                </div>
+
+                <div class="battlefield">
+                    <div class="battlefield-section" id="creatures-area">
+                        <h4>Battlefield</h4>
+                        <div class="card-zone" id="battlefield-zone">
+                            <!-- Creature cards will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Player Hand & Actions -->
+            <section class="player-area" role="region" aria-label="Player Area">
+                <div class="hand-area">
+                    <h3>Hand</h3>
+                    <div id="player-hand" class="card-zone hand-zone">
+                        <!-- Player's hand cards will appear here -->
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="draw-card-btn" class="action-btn">Draw Card</button>
+                    <button id="end-turn-btn" class="action-btn">End Turn</button>
+                    <button id="use-ability-btn" class="action-btn">Use Ability</button>
+                    <button id="explore-btn" class="action-btn">Explore</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Forum Tab Content -->
+        <div id="forum-tab" class="tab-content" role="tabpanel">
+            <section class="forum-section">
+                <h2>🎴 9898-MTG-League Forum</h2>
+                <div class="forum-controls">
+                    <button id="generate-post-btn" class="action-btn">Generate Random Post</button>
+                    <button id="clear-forum-btn" class="action-btn">Clear Forum</button>
+                </div>
+                <div id="forum-posts" class="forum-posts">
+                    <div class="forum-post welcome-post">
+                        <h3>Welcome to 9898-MTG-League!</h3>
+                        <p>Click "Generate Random Post" to create content using our <code>[bracket]</code> syntax generators.</p>
+                        <div class="post-content">
+                            <strong>Sample generators:</strong>
+                            <ul>
+                                <li><code>[randomEncounter]</code> - Random MTG encounters</li>
+                                <li><code>[questObjective]</code> - Dynamic quest generation</li>
+                                <li><code>[customCardName]</code> - Unique card names</li>
+                                <li><code>[magicalEffect]</code> - Spell effects</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Deck Builder Tab Content -->
+        <div id="deck-builder-tab" class="tab-content" role="tabpanel">
+            <section class="deck-builder-section">
+                <h2>🃏 Deck Builder & Statistics</h2>
+                <div class="deck-builder-controls">
+                    <button id="generate-booster-btn" class="action-btn">Generate Booster Pack</button>
+                    <button id="analyze-deck-btn" class="action-btn">Analyze Current Deck</button>
+                    <select id="personality-select" class="personality-selector">
+                        <option value="default">Default Personality</option>
+                        <option value="cautious">Cautious</option>
+                        <option value="experimental">Experimental</option>
+                        <option value="reckless">Reckless</option>
+                    </select>
+                </div>
+                <div class="deck-area">
+                    <div class="booster-packs">
+                        <h3>Generated Booster Packs</h3>
+                        <div id="booster-display" class="booster-display">
+                            <p>Click "Generate Booster Pack" to create random card packs using Scryfall API</p>
+                        </div>
+                    </div>
+                    <div class="deck-stats">
+                        <h3>Deck Statistics</h3>
+                        <div id="deck-analysis" class="deck-analysis">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Cards:</span>
+                                <span class="stat-value" id="total-cards">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average CMC:</span>
+                                <span class="stat-value" id="avg-cmc">0.0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Creatures:</span>
+                                <span class="stat-value" id="creature-count">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Spells:</span>
+                                <span class="stat-value" id="spell-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Turn Structure Tab Content -->
+        <div id="turn-structure-tab" class="tab-content" role="tabpanel">
+            <section class="turn-structure-section">
+                <h2>⚔️ MTG Turn Structure</h2>
+                <div class="turn-controls">
+                    <button id="next-phase-btn" class="action-btn">Next Phase</button>
+                    <button id="reset-turn-btn" class="action-btn">Reset Turn</button>
+                </div>
+                <div class="battlefield-zones">
+                    <div class="zone-section">
+                        <h3>Current Phase</h3>
+                        <div id="current-phase" class="current-phase">Beginning Phase - Untap Step</div>
+                    </div>
+                    <div class="zone-section">
+                        <h3>Battlefield Zones</h3>
+                        <div class="battlefield-grid">
+                            <div class="battlefield-zone" id="library-zone">
+                                <h4>Library</h4>
+                                <div class="zone-content"></div>
+                            </div>
+                            <div class="battlefield-zone" id="hand-zone">
+                                <h4>Hand</h4>
+                                <div class="zone-content"></div>
+                            </div>
+                            <div class="battlefield-zone" id="battlefield-zone">
+                                <h4>Battlefield</h4>
+                                <div class="zone-content"></div>
+                            </div>
+                            <div class="battlefield-zone" id="graveyard-zone">
+                                <h4>Graveyard</h4>
+                                <div class="zone-content"></div>
+                            </div>
+                            <div class="battlefield-zone" id="exile-zone">
+                                <h4>Exile</h4>
+                                <div class="zone-content"></div>
+                            </div>
+                            <div class="battlefield-zone" id="command-zone">
+                                <h4>Command Zone</h4>
+                                <div class="zone-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="turn-sequence">
+                    <h3>Turn Sequence</h3>
+                    <ol class="phase-list">
+                        <li class="phase-item active" data-phase="beginning">
+                            <strong>Beginning Phase</strong>
+                            <ul>
+                                <li class="step-item active" data-step="untap">Untap Step</li>
+                                <li class="step-item" data-step="upkeep">Upkeep Step</li>
+                                <li class="step-item" data-step="draw">Draw Step</li>
+                            </ul>
+                        </li>
+                        <li class="phase-item" data-phase="main1">
+                            <strong>Main Phase</strong>
+                        </li>
+                        <li class="phase-item" data-phase="combat">
+                            <strong>Combat Phase</strong>
+                            <ul>
+                                <li class="step-item" data-step="beginning-combat">Beginning of Combat Step</li>
+                                <li class="step-item" data-step="declare-attackers">Declare Attackers Step</li>
+                                <li class="step-item" data-step="declare-blockers">Declare Blockers Step</li>
+                                <li class="step-item" data-step="combat-damage">Combat Damage Step</li>
+                                <li class="step-item" data-step="end-combat">End of Combat Step</li>
+                            </ul>
+                        </li>
+                        <li class="phase-item" data-phase="main2">
+                            <strong>Second Main Phase</strong>
+                        </li>
+                        <li class="phase-item" data-phase="ending">
+                            <strong>Ending Phase</strong>
+                            <ul>
+                                <li class="step-item" data-step="end">End Step</li>
+                                <li class="step-item" data-step="cleanup">Cleanup Step</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+
+        <!-- Membership Tab Content -->
+        <div id="membership-tab" class="tab-content" role="tabpanel">
+            <section class="membership-section">
+                <h2>📜 9898-MTG-League Membership</h2>
+                <div class="membership-intro">
+                    <p>Join the 9898-MTG-League and participate in our 24-7 Custom Rule 0 Magic The Gathering Chaos RPG Format!</p>
+                </div>
+                <form id="membership-form" class="membership-form">
+                    <div class="form-group">
+                        <label for="member-name">Player Name:</label>
+                        <input type="text" id="member-name" name="memberName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="member-email">Email:</label>
+                        <input type="email" id="member-email" name="memberEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-level">MTG Experience Level:</label>
+                        <select id="experience-level" name="experienceLevel">
+                            <option value="beginner">Beginner</option>
+                            <option value="casual">Casual</option>
+                            <option value="competitive">Competitive</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferred-format">Preferred Format:</label>
+                        <select id="preferred-format" name="preferredFormat">
+                            <option value="chaos-rpg">Chaos RPG</option>
+                            <option value="commander">Commander</option>
+                            <option value="standard">Standard</option>
+                            <option value="modern">Modern</option>
+                        </select>
+                    </div>
+                    <div class="terms-section">
+                        <h3>Terms and Conditions</h3>
+                        <div class="terms-content">
+                            <p><strong>9898-MTG-League Membership Agreement</strong></p>
+                            <ul>
+                                <li>I agree to participate respectfully in all league events and interactions</li>
+                                <li>I understand this is a casual, community-driven format focusing on fun and creativity</li>
+                                <li>I agree to follow the custom Rule 0 guidelines established by the league</li>
+                                <li>I acknowledge that this format includes chaos elements and random generation</li>
+                                <li>I will respect other players and maintain a positive gaming environment</li>
+                                <li>I understand that gameplay may include custom cards and house rules</li>
+                                <li>I agree to seek The Kingdom of Heaven first in all interactions</li>
+                            </ul>
+                        </div>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="accept-terms" name="acceptTerms" required>
+                            I accept the terms and conditions above
+                        </label>
+                    </div>
+                    <button type="submit" class="action-btn membership-submit">Join 9898-MTG-League</button>
+                </form>
+            </section>
+        </div>
+        </div>
     </main>
 
     <!-- Modals -->
