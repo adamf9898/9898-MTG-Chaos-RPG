@@ -76,6 +76,27 @@ class MTGChaosRPG {
         // Settings form
         document.getElementById('settings-form')?.addEventListener('submit', this.handleSettingsSubmit.bind(this));
         
+        // Tab navigation
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', this.handleTabSwitch.bind(this));
+        });
+        
+        // Forum functionality
+        document.getElementById('generate-post-btn')?.addEventListener('click', this.handleGeneratePost.bind(this));
+        document.getElementById('clear-forum-btn')?.addEventListener('click', this.handleClearForum.bind(this));
+        
+        // Deck builder functionality
+        document.getElementById('generate-booster-btn')?.addEventListener('click', this.handleGenerateBooster.bind(this));
+        document.getElementById('analyze-deck-btn')?.addEventListener('click', this.handleAnalyzeDeck.bind(this));
+        document.getElementById('personality-select')?.addEventListener('change', this.handlePersonalityChange.bind(this));
+        
+        // Turn structure functionality
+        document.getElementById('next-phase-btn')?.addEventListener('click', this.handleNextPhase.bind(this));
+        document.getElementById('reset-turn-btn')?.addEventListener('click', this.handleResetTurn.bind(this));
+        
+        // Membership form
+        document.getElementById('membership-form')?.addEventListener('submit', this.handleMembershipSubmit.bind(this));
+        
         // Click outside modal to close
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
@@ -735,6 +756,265 @@ class MTGChaosRPG {
         `;
         
         this.showCustomModal('Victory!', victoryContent);
+    }
+
+    /**
+     * Handle tab switching
+     */
+    handleTabSwitch(e) {
+        const targetTab = e.target.getAttribute('data-tab');
+        
+        // Remove active class from all tabs and content
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // Add active class to clicked tab and its content
+        e.target.classList.add('active');
+        e.target.setAttribute('aria-selected', 'true');
+        const targetContent = document.getElementById(`${targetTab}-tab`);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+    }
+
+    /**
+     * Handle generate forum post
+     */
+    handleGeneratePost() {
+        const forumPosts = document.getElementById('forum-posts');
+        if (!forumPosts) return;
+
+        // Generate random content using bracket syntax
+        const content = this.generateRandomContent();
+        const post = document.createElement('div');
+        post.className = 'forum-post';
+        post.innerHTML = `
+            <h3>Random Generation - ${new Date().toLocaleTimeString()}</h3>
+            <div class="post-content">
+                ${content}
+            </div>
+        `;
+        
+        forumPosts.appendChild(post);
+        forumPosts.scrollTop = forumPosts.scrollHeight;
+    }
+
+    /**
+     * Generate random content using bracket syntax
+     */
+    generateRandomContent() {
+        const templates = [
+            'Encounter: [randomEncounter]',
+            'Quest: [questObjective]', 
+            'Custom Card: [customCardName] - [magicalEffect]',
+            'Boss Ability: [bossAbility] with [magicalEffect]',
+            'Loot Found: [rewardType] of [treasureQuality]'
+        ];
+        
+        const template = templates[Math.floor(Math.random() * templates.length)];
+        
+        // Replace bracket syntax with generated content
+        return template.replace(/\[(\w+)\]/g, (match, generatorName) => {
+            try {
+                return perchanceGenerator.generate(generatorName);
+            } catch (error) {
+                return `<em>Unknown generator: ${generatorName}</em>`;
+            }
+        });
+    }
+
+    /**
+     * Clear forum posts
+     */
+    handleClearForum() {
+        const forumPosts = document.getElementById('forum-posts');
+        if (forumPosts) {
+            // Keep only the welcome post
+            const welcomePost = forumPosts.querySelector('.welcome-post');
+            forumPosts.innerHTML = '';
+            if (welcomePost) {
+                forumPosts.appendChild(welcomePost);
+            }
+        }
+    }
+
+    /**
+     * Handle generate booster pack
+     */
+    async handleGenerateBooster() {
+        const boosterDisplay = document.getElementById('booster-display');
+        if (!boosterDisplay) return;
+
+        try {
+            this.showLoading('Generating booster pack...');
+            
+            // Use Scryfall API to get random cards
+            const cards = await scryfallAPI.getRandomCards(15); // Standard booster size
+            
+            let boosterHtml = '<div class="booster-pack"><h4>Generated Booster Pack</h4><div class="card-grid">';
+            
+            cards.forEach(card => {
+                boosterHtml += `
+                    <div class="mini-card" title="${card.name}">
+                        <img src="${card.image_uris?.small || '/placeholder-card.png'}" 
+                             alt="${card.name}" loading="lazy">
+                        <div class="card-name">${card.name}</div>
+                    </div>
+                `;
+            });
+            
+            boosterHtml += '</div></div>';
+            boosterDisplay.innerHTML = boosterHtml;
+            
+            this.hideLoading();
+        } catch (error) {
+            console.error('Error generating booster pack:', error);
+            boosterDisplay.innerHTML = `<p class="error">Error generating booster pack. Please try again.</p>`;
+            this.hideLoading();
+        }
+    }
+
+    /**
+     * Handle deck analysis
+     */
+    handleAnalyzeDeck() {
+        const currentDeck = gameState.state.players[0]?.deck || [];
+        
+        // Calculate statistics
+        const totalCards = currentDeck.length;
+        const avgCMC = totalCards > 0 ? 
+            (currentDeck.reduce((sum, card) => sum + (card.cmc || 0), 0) / totalCards).toFixed(1) : 0;
+        const creatures = currentDeck.filter(card => card.type && card.type.includes('Creature')).length;
+        const spells = totalCards - creatures;
+
+        // Update UI
+        document.getElementById('total-cards').textContent = totalCards;
+        document.getElementById('avg-cmc').textContent = avgCMC;
+        document.getElementById('creature-count').textContent = creatures;
+        document.getElementById('spell-count').textContent = spells;
+    }
+
+    /**
+     * Handle personality change
+     */
+    handlePersonalityChange(e) {
+        const personality = e.target.value;
+        gameState.updateSettings({ aiPersonality: personality });
+        this.showMessage(`AI Personality set to: ${personality.charAt(0).toUpperCase() + personality.slice(1)}`);
+    }
+
+    /**
+     * Handle next phase in turn structure
+     */
+    handleNextPhase() {
+        const phases = [
+            { name: 'Beginning Phase - Untap Step', phase: 'beginning', step: 'untap' },
+            { name: 'Beginning Phase - Upkeep Step', phase: 'beginning', step: 'upkeep' },
+            { name: 'Beginning Phase - Draw Step', phase: 'beginning', step: 'draw' },
+            { name: 'Main Phase', phase: 'main1', step: null },
+            { name: 'Combat Phase - Beginning of Combat', phase: 'combat', step: 'beginning-combat' },
+            { name: 'Combat Phase - Declare Attackers', phase: 'combat', step: 'declare-attackers' },
+            { name: 'Combat Phase - Declare Blockers', phase: 'combat', step: 'declare-blockers' },
+            { name: 'Combat Phase - Combat Damage', phase: 'combat', step: 'combat-damage' },
+            { name: 'Combat Phase - End of Combat', phase: 'combat', step: 'end-combat' },
+            { name: 'Second Main Phase', phase: 'main2', step: null },
+            { name: 'Ending Phase - End Step', phase: 'ending', step: 'end' },
+            { name: 'Ending Phase - Cleanup Step', phase: 'ending', step: 'cleanup' }
+        ];
+
+        // Get current phase index
+        let currentIndex = gameState.state.currentPhaseIndex || 0;
+        currentIndex = (currentIndex + 1) % phases.length;
+        
+        gameState.setState({ currentPhaseIndex: currentIndex });
+        
+        const currentPhase = phases[currentIndex];
+        this.updateTurnDisplay(currentPhase);
+    }
+
+    /**
+     * Reset turn structure to beginning
+     */
+    handleResetTurn() {
+        gameState.setState({ currentPhaseIndex: 0 });
+        this.updateTurnDisplay({ name: 'Beginning Phase - Untap Step', phase: 'beginning', step: 'untap' });
+    }
+
+    /**
+     * Update turn structure display
+     */
+    updateTurnDisplay(currentPhase) {
+        // Update current phase display
+        const currentPhaseEl = document.getElementById('current-phase');
+        if (currentPhaseEl) {
+            currentPhaseEl.textContent = currentPhase.name;
+        }
+
+        // Update phase highlighting
+        document.querySelectorAll('.phase-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        document.querySelectorAll('.step-item').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        const activePhase = document.querySelector(`[data-phase="${currentPhase.phase}"]`);
+        if (activePhase) {
+            activePhase.classList.add('active');
+        }
+
+        if (currentPhase.step) {
+            const activeStep = document.querySelector(`[data-step="${currentPhase.step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+    }
+
+    /**
+     * Handle membership form submission
+     */
+    handleMembershipSubmit(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const membershipData = {
+            name: formData.get('memberName'),
+            email: formData.get('memberEmail'),
+            experienceLevel: formData.get('experienceLevel'),
+            preferredFormat: formData.get('preferredFormat'),
+            termsAccepted: formData.get('acceptTerms') === 'on',
+            joinDate: new Date().toISOString()
+        };
+
+        if (!membershipData.termsAccepted) {
+            this.showError('Please accept the terms and conditions to continue.');
+            return;
+        }
+
+        // Store membership data (in a real app, this would be sent to a server)
+        localStorage.setItem('9898-mtg-membership', JSON.stringify(membershipData));
+        
+        this.showCustomModal('Welcome to 9898-MTG-League!', `
+            <p>Congratulations, <strong>${membershipData.name}</strong>!</p>
+            <p>You are now a member of the 9898-MTG-League.</p>
+            <p>Experience Level: <strong>${membershipData.experienceLevel}</strong></p>
+            <p>Preferred Format: <strong>${membershipData.preferredFormat}</strong></p>
+            <p>May The Kingdom of Heaven guide your path in our Chaos RPG adventures!</p>
+            <div style="margin-top: 20px;">
+                <button onclick="document.querySelector('.modal.show .modal-close').click()" class="action-btn">
+                    Begin Your Journey
+                </button>
+            </div>
+        `);
+
+        // Reset form
+        e.target.reset();
     }
 }
 

@@ -410,3 +410,400 @@ button:focus, .mtg-card:focus {
         color: #000000;
     }
 }
+
+/* Forum Tab Styles */
+.forum-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom: 2px solid #ffd700;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.tab-btn {
+    background: linear-gradient(45deg, #4a1d1d, #2d1111);
+    border: none;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-right: 1px solid #ffd700;
+    font-weight: bold;
+    position: relative;
+    z-index: 5;
+}
+
+.tab-btn:hover {
+    background: linear-gradient(45deg, #6a2d2d, #4d2121);
+}
+
+.tab-btn.active {
+    background: linear-gradient(45deg, #8B0000, #DC143C);
+    color: #ffd700;
+    border-bottom: 3px solid #ffd700;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Forum Section Styles */
+.forum-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #8B0000;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.forum-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.forum-posts {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.forum-post {
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid #8B0000;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.forum-post:hover {
+    background: rgba(139, 0, 0, 0.2);
+    border-color: #DC143C;
+}
+
+.forum-post h3 {
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+}
+
+.forum-post code {
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffd700;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Deck Builder Styles */
+.deck-builder-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #8B0000;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.deck-builder-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.personality-selector {
+    background: linear-gradient(45deg, #4a5568, #2d3748);
+    border: 2px solid #ffd700;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.deck-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.booster-display {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 300px;
+}
+
+.deck-analysis {
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid #8B0000;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.stat-label {
+    color: #ffffff;
+}
+
+.stat-value {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Turn Structure Styles */
+.turn-structure-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #8B0000;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.turn-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.current-phase {
+    background: linear-gradient(45deg, #8B0000, #DC143C);
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.battlefield-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.battlefield-zone {
+    background: rgba(139, 0, 0, 0.1);
+    border: 2px solid #8B0000;
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 150px;
+}
+
+.battlefield-zone h4 {
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.zone-content {
+    min-height: 100px;
+    border: 1px dashed #4a5568;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-style: italic;
+}
+
+.phase-list {
+    list-style: none;
+    padding: 0;
+}
+
+.phase-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.phase-item.active {
+    background: rgba(139, 0, 0, 0.2);
+    border-color: #8B0000;
+    color: #ffd700;
+}
+
+.phase-item ul {
+    list-style: none;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+
+.step-item {
+    padding: 0.25rem 0;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.step-item.active {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Membership Styles */
+.membership-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #8B0000;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.membership-intro {
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid #8B0000;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    color: #ffd700;
+    text-align: center;
+}
+
+.membership-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #4a5568;
+    color: #ffffff;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #ffd700;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.terms-section {
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid #8B0000;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.terms-content {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    border: 1px solid #4a5568;
+    border-radius: 4px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+}
+
+.membership-submit {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background: linear-gradient(45deg, #8B0000, #DC143C);
+}
+
+/* Booster Pack Card Styles */
+.booster-pack {
+    margin-bottom: 1rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.mini-card {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #4a5568;
+    border-radius: 6px;
+    padding: 0.25rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.mini-card:hover {
+    border-color: #ffd700;
+    transform: scale(1.05);
+}
+
+.mini-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.25rem;
+}
+
+.mini-card .card-name {
+    font-size: 0.7rem;
+    color: #ffffff;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+
+/* Responsive Design for New Sections */
+@media (max-width: 768px) {
+    .forum-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .deck-area {
+        grid-template-columns: 1fr;
+    }
+    
+    .battlefield-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}

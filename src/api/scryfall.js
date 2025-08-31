@@ -218,6 +218,33 @@ class ScryfallAPI {
     }
 
     /**
+     * Get random cards for booster pack generation
+     * @param {number} count - Number of random cards to fetch
+     */
+    async getRandomCards(count = 15) {
+        const cards = [];
+        const maxRetries = count * 2; // Avoid infinite loops
+        let retries = 0;
+
+        while (cards.length < count && retries < maxRetries) {
+            try {
+                const response = await this.makeRequest('/cards/random');
+                if (response && response.name) {
+                    // Avoid duplicates
+                    if (!cards.find(card => card.name === response.name)) {
+                        cards.push(response);
+                    }
+                }
+            } catch (error) {
+                console.warn('Failed to fetch random card:', error);
+            }
+            retries++;
+        }
+
+        return cards;
+    }
+
+    /**
      * Get card sets information
      */
     async getSets() {
