@@ -6,6 +6,7 @@
 import scryfallAPI from '../src/api/scryfall.js';
 import perchanceGenerator from '../src/generators/perchance.js';
 import gameState from '../src/core/gameState.js';
+import aiService from '../src/ai/aiService.js';
 
 class MTGChaosRPG {
     constructor() {
@@ -186,8 +187,8 @@ class MTGChaosRPG {
      */
     async generateInitialContent() {
         try {
-            // Generate starting encounter
-            const initialEncounter = perchanceGenerator.generateCompleteEncounter();
+            // Generate AI-enhanced starting encounter
+            const initialEncounter = aiService.generateAIEncounter();
             gameState.startEncounter(initialEncounter);
             
             // Draw initial hand
@@ -387,8 +388,8 @@ class MTGChaosRPG {
         try {
             this.showLoading('Exploring...');
             
-            // Generate a random encounter
-            const encounter = perchanceGenerator.generateCompleteEncounter();
+            // Generate an AI-enhanced encounter
+            const encounter = aiService.generateAIEncounter();
             gameState.startEncounter(encounter);
             
             // Random chance for loot or quest
@@ -398,7 +399,7 @@ class MTGChaosRPG {
             }
             
             if (Math.random() < 0.2) {
-                const quest = perchanceGenerator.generateQuest();
+                const quest = aiService.generateAIQuest();
                 gameState.addQuest(quest);
             }
             
@@ -478,13 +479,46 @@ class MTGChaosRPG {
         const encounterElement = document.getElementById('encounter-display');
         
         if (encounter) {
-            encounterElement.innerHTML = `
+            let html = `
                 <h4>${encounter.title || 'Current Encounter'}</h4>
+                ${encounter.aiGenerated ? '<span class="ai-badge">AI Enhanced</span>' : ''}
                 <p><strong>Location:</strong> ${encounter.location || 'Unknown'}</p>
                 ${encounter.weather ? `<p><strong>Weather:</strong> ${encounter.weather}</p>` : ''}
                 <p><strong>Difficulty:</strong> ${encounter.difficulty || 1}/5</p>
-                ${encounter.special ? `<p><strong>Special:</strong> ${encounter.special}</p>` : ''}
             `;
+            
+            // Add AI-enhanced narrative
+            if (encounter.narrative) {
+                html += `<div class="encounter-narrative"><em>${encounter.narrative}</em></div>`;
+            }
+            
+            // Add special mechanics
+            if (encounter.specialMechanics && encounter.specialMechanics.length > 0) {
+                html += '<div class="special-mechanics"><strong>Special Mechanics:</strong><ul>';
+                encounter.specialMechanics.forEach(mechanic => {
+                    html += `<li><strong>${mechanic.name}:</strong> ${mechanic.effect}</li>`;
+                });
+                html += '</ul></div>';
+            }
+            
+            // Add environment
+            if (encounter.environment) {
+                html += `<div class="environment-effect">
+                    <strong>Environment:</strong> ${encounter.environment.name}<br>
+                    <em>${encounter.environment.effect}</em>
+                </div>`;
+            }
+            
+            // Add consequences
+            if (encounter.consequences && encounter.consequences.length > 0) {
+                html += '<div class="consequences"><strong>Consequences:</strong><ul>';
+                encounter.consequences.forEach(cons => {
+                    html += `<li class="severity-${cons.severity}">${cons.description}</li>`;
+                });
+                html += '</ul></div>';
+            }
+            
+            encounterElement.innerHTML = html;
         } else {
             encounterElement.innerHTML = '<p>Click "Explore" to discover new encounters!</p>';
         }
@@ -904,6 +938,7 @@ class MTGChaosRPG {
      */
     handlePersonalityChange(e) {
         const personality = e.target.value;
+        aiService.setPersonality(personality);
         gameState.updateSettings({ aiPersonality: personality });
         this.showMessage(`AI Personality set to: ${personality.charAt(0).toUpperCase() + personality.slice(1)}`);
     }

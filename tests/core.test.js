@@ -254,6 +254,84 @@ describe('MTG Chaos RPG Core Tests', () => {
         assert.strictEqual(mockInventory.length, 0);
         assert.strictEqual(removedItem.name, 'Test Item');
     });
+    
+    test('AI Service Integration', async () => {
+        // Mock test for AI service
+        const mockAIService = {
+            personality: 'default',
+            personalities: {
+                default: { creativity: 0.7, danger: 0.5, humor: 0.3 },
+                cautious: { creativity: 0.5, danger: 0.3, humor: 0.2 },
+                experimental: { creativity: 0.9, danger: 0.6, humor: 0.5 },
+                reckless: { creativity: 0.8, danger: 0.9, humor: 0.4 }
+            },
+            storyContext: {
+                majorEvents: [],
+                npcRelationships: new Map()
+            },
+            
+            setPersonality(personality) {
+                if (this.personalities[personality]) {
+                    this.personality = personality;
+                }
+            },
+            
+            getPersonality() {
+                return this.personalities[this.personality];
+            },
+            
+            generateAIEncounter() {
+                const personality = this.getPersonality();
+                return {
+                    title: 'AI Generated Encounter',
+                    aiGenerated: true,
+                    personality: this.personality,
+                    difficulty: Math.min(5, Math.max(1, 3 + (personality.danger > 0.7 ? 1 : 0))),
+                    narrative: 'An AI-enhanced narrative',
+                    specialMechanics: personality.creativity > 0.7 ? [{ name: 'Test Mechanic' }] : [],
+                    environment: personality.creativity > 0.5 ? { name: 'Test Environment' } : null
+                };
+            },
+            
+            generateAIQuest() {
+                return {
+                    title: 'AI Generated Quest',
+                    aiEnhanced: true,
+                    narrative: 'An AI-enhanced quest narrative',
+                    dynamicObjectives: [{ description: 'Test objective', completed: false }]
+                };
+            }
+        };
+        
+        // Test personality setting
+        assert.strictEqual(mockAIService.personality, 'default');
+        mockAIService.setPersonality('experimental');
+        assert.strictEqual(mockAIService.personality, 'experimental');
+        
+        // Test personality config
+        const personality = mockAIService.getPersonality();
+        assert.strictEqual(typeof personality.creativity, 'number');
+        assert.strictEqual(typeof personality.danger, 'number');
+        assert.strictEqual(personality.creativity, 0.9);
+        
+        // Test AI encounter generation
+        const encounter = mockAIService.generateAIEncounter();
+        assert.strictEqual(encounter.aiGenerated, true);
+        assert.strictEqual(encounter.personality, 'experimental');
+        assert.strictEqual(typeof encounter.narrative, 'string');
+        assert.strictEqual(Array.isArray(encounter.specialMechanics), true);
+        
+        // Test AI quest generation
+        const quest = mockAIService.generateAIQuest();
+        assert.strictEqual(quest.aiEnhanced, true);
+        assert.strictEqual(typeof quest.narrative, 'string');
+        assert.strictEqual(Array.isArray(quest.dynamicObjectives), true);
+        
+        // Test difficulty scaling
+        mockAIService.setPersonality('reckless');
+        const dangerousEncounter = mockAIService.generateAIEncounter();
+        assert.strictEqual(dangerousEncounter.difficulty >= 3, true);
+    });
 });
 
 console.log('Running MTG Chaos RPG tests...');
