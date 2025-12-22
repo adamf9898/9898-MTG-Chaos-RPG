@@ -6,6 +6,14 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 
 ### ✅ Implemented Core Systems
 
+#### 🤖 AI-Driven Content Generation
+- **Dynamic Storytelling**: AI-enhanced narratives that adapt to player choices
+- **Personality System**: Choose between Default, Cautious, Experimental, or Reckless AI personalities
+- **Adaptive Encounters**: Difficulty and mechanics scale based on AI personality
+- **Smart NPCs**: AI-generated dialogue and behavior patterns
+- **Procedural Quests**: Dynamic quest generation with moral choices and bonus objectives
+- **Boss Intelligence**: AI-driven boss tactics and phase transitions
+
 #### 🎮 Game Architecture & State Management
 - **Modular Design**: Clean separation of concerns with dedicated modules for API, generators, and game logic
 - **Observer Pattern**: Real-time UI updates through state change notifications
@@ -85,6 +93,22 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 4. Play cards to the battlefield
 5. Use **"End Turn"** to progress
 
+### AI Personalities
+
+The game features four AI personality modes that affect encounter generation and difficulty:
+
+- **Default**: Balanced gameplay with moderate challenge (Creativity: 70%, Danger: 50%)
+- **Cautious**: Safe, predictable encounters with lower difficulty (Creativity: 50%, Danger: 30%)
+- **Experimental**: Creative, unpredictable scenarios with unique twists (Creativity: 90%, Danger: 60%)
+- **Reckless**: High-risk, high-reward encounters with intense challenges (Creativity: 80%, Danger: 90%)
+
+Select your preferred AI personality in the Deck Builder tab to customize your game experience. The AI will:
+- Generate dynamic narratives based on your actions
+- Scale encounter difficulty appropriately
+- Create unique special mechanics and environmental effects
+- Adapt boss behavior and tactics
+- Generate quests with moral choices and bonus objectives
+
 ## 🔗 Original Links
 
 - **TTS Mod**: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2815480422)
@@ -157,6 +181,8 @@ User Interaction → Game State → UI Update
 ### Module Structure
 ```
 src/
+├── ai/
+│   └── aiService.js         # AI-driven content generation
 ├── api/
 │   └── scryfall.js          # Scryfall API client
 ├── core/
@@ -178,6 +204,7 @@ npm test
 - ✅ Game State Management
 - ✅ Perchance Generator Logic
 - ✅ Scryfall API Integration
+- ✅ AI Service Integration
 - ✅ Boss Battle Mechanics
 - ✅ Player Management
 - ✅ Encounter Generation

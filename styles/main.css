@@ -807,3 +807,134 @@ button:focus, .mtg-card:focus {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
+
+/* AI-Enhanced Content Styles */
+.ai-badge {
+    display: inline-block;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.4);
+    animation: ai-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ai-pulse {
+    0%, 100% {
+        box-shadow: 0 2px 4px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 8px rgba(102, 126, 234, 0.8);
+    }
+}
+
+.encounter-narrative {
+    background: rgba(102, 126, 234, 0.1);
+    border-left: 3px solid #667eea;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.special-mechanics {
+    background: rgba(255, 107, 107, 0.1);
+    border: 2px solid #ff6b6b;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.special-mechanics ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.special-mechanics li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.special-mechanics li:last-child {
+    border-bottom: none;
+}
+
+.special-mechanics strong {
+    color: #ff6b6b;
+}
+
+.environment-effect {
+    background: rgba(72, 187, 120, 0.1);
+    border: 2px solid #48bb78;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.environment-effect strong {
+    color: #48bb78;
+}
+
+.consequences {
+    background: rgba(237, 137, 54, 0.1);
+    border: 2px solid #ed8936;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.consequences ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.consequences li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.consequences li::before {
+    content: "⚠️";
+    position: absolute;
+    left: 0;
+}
+
+.severity-high {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.severity-medium {
+    color: #ed8936;
+}
+
+.severity-low {
+    color: #f6e05e;
+}
+
+.personality-selector {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #667eea;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.personality-selector:hover {
+    border-color: #764ba2;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.personality-selector:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
