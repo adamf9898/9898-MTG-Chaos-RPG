@@ -1,0 +1,4 @@
+{
+  "shopTypes": ["Weaponsmith", "Potion Seller", "Curio Dealer"],
+  "items": ["Sword", "Amulet", "Health Potion", "Magic Scroll"]
+}
