@@ -1,9 +1,8 @@
---[[9898-MTG-Chaos-RPG-Generator
-
-
+--[[
+**Generator Name**
 ]]
 local Randomizer={[[
-[b]DEEP IQ:[/b]     
+1d{enter your variables here; seperated by semicolons; etc}  
 ]]}
 local Reward=('\n[b]Ignore This:[/b] Gain 1d{1d2+{numPlayers} {Pearl Amulets;Sapphire Amulets;Jet Amulets;Ruby Amulets;Emerald Amulets};{numPlayers}d2-1 {Pearl Amulets;Sapphire Amulets;Jet Amulets;Ruby Amulets;Emerald Amulets};{numPlayers}0d{numPlayers}0+9  {Gold Coins;Gold Bars};31d1{numPlayers}+99 {Gold Coins;Gold Bars}; 21d2{numPlayers}+99 {Gold Coins;Gold Bars};a Mana Link;an Evolving Wilds tokenB;1d2+0 food tokenB;3d3-1 lifeB;1d3+2 lifeB}.'):gsub('B',' at the start of the next duel [i](First Upkeep)[/i]')
 function tn()
@@ -14,7 +13,7 @@ function tn()
 local N=1
 function Z()self.reload()end
 function onLoad()self.addContextMenuItem('Reload',Z)
-self.createButton({label='[b]9898-MTG-Chaos-RPG-Generator[/b]',font_color={1,1,1},position={0,0.01,0},font_size=250,scale={0.4,1,0.4},rotation={0,-90,0},width=0,height=0,click_function='Z',function_owner=self})end
+self.createButton({label=`[b]9898-MTG-Chaos-RPG[/b] /n [b]Generator[/b]`,font_color={1,1,1},position={0,0.01,0},font_size=250,scale={0.4,1,0.4},rotation={0,-90,0},width=0,height=0,click_function='Z',function_owner=self})end
 function onObjectLeaveContainer(c,o)if c~=self then return end N=N+1 if N>#Randomizer then N=1 end
 local q=Randomizer[N]:gsub('TOWN',tn())
 o.setDescription(RF(self,'DM',q..Reward))end
