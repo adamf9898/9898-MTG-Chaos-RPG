@@ -7,6 +7,7 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 ### ✅ Implemented Core Systems
 
 #### 🤖 AI-Driven Content Generation
+
 - **Dynamic Storytelling**: AI-enhanced narratives that adapt to player choices
 - **Personality System**: Choose between Default, Cautious, Experimental, or Reckless AI personalities
 - **Adaptive Encounters**: Difficulty and mechanics scale based on AI personality
@@ -15,35 +16,41 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 - **Boss Intelligence**: AI-driven boss tactics and phase transitions
 
 #### 🎮 Game Architecture & State Management
+
 - **Modular Design**: Clean separation of concerns with dedicated modules for API, generators, and game logic
 - **Observer Pattern**: Real-time UI updates through state change notifications
 - **Persistent State**: Game state management with save/load capabilities (foundation implemented)
 
 #### 🃏 Scryfall API Integration
+
 - **Rate-Limited Requests**: Respects Scryfall's API guidelines with built-in rate limiting
 - **Intelligent Caching**: Reduces API calls and improves performance
 - **Card Search**: Powerful search functionality using Scryfall's syntax
 - **Fallback System**: Graceful degradation when API is unavailable
 
 #### 🎲 Perchance-Compatible Generator System
+
 - **Dynamic Content**: Procedural generation of encounters, quests, and loot
 - **Nested Generators**: Support for complex template patterns `[generatorName]`
 - **Extensible**: Easy to add new generator categories and content
 - **History Tracking**: Generation history for debugging and analysis
 
 #### 🎨 Frontend UI & Accessibility
+
 - **Responsive Design**: Mobile-friendly interface that adapts to different screen sizes
 - **Accessibility Features**: ARIA labels, keyboard navigation, focus management
 - **Dark Theme**: MTG-inspired color scheme with gold accents
 - **Interactive Cards**: Drag-and-drop ready card system with hover effects
 
 #### 🏰 Boss & Encounter System
+
 - **8 Master Bosses**: Unique bosses with different abilities and weaknesses
 - **Dynamic Encounters**: Procedurally generated encounters with varying difficulty
 - **Quest System**: Multi-objective quests with progress tracking
 - **Inventory Management**: Loot and reward system
 
 #### ⚔️ Combat & Card System
+
 - **MTG Card Integration**: Real Magic cards with proper formatting
 - **Hand Management**: Draw, play, and manage cards
 - **Battlefield Tracking**: Visual representation of played cards
@@ -60,6 +67,7 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Modern web browser with ES6 module support
 - Node.js 18+ (for development)
 - Internet connection (for Scryfall API, optional)
@@ -67,20 +75,23 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 ### Installation
 
 1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/adamf9898/9898-MTG-Chaos-RPG.git
-   cd 9898-MTG-Chaos-RPG
-   ```
+
+    ```bash
+    git clone https://github.com/adamf9898/9898-MTG-Chaos-RPG.git
+    cd 9898-MTG-Chaos-RPG
+    ```
 
 2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 3. **Start development server**:
-   ```bash
-   npm run serve
-   ```
+
+    ```bash
+    npm run serve
+    ```
 
 4. **Open in browser**:
    Navigate to `http://localhost:8000`
@@ -103,6 +114,7 @@ The game features four AI personality modes that affect encounter generation and
 - **Reckless**: High-risk, high-reward encounters with intense challenges (Creativity: 80%, Danger: 90%)
 
 Select your preferred AI personality in the Deck Builder tab to customize your game experience. The AI will:
+
 - Generate dynamic narratives based on your actions
 - Scale encounter difficulty appropriately
 - Create unique special mechanics and environmental effects
@@ -122,22 +134,26 @@ Select your preferred AI personality in the Deck Builder tab to customize your g
 ### Core Mechanics
 
 #### Cooperative Play
+
 - Team up with other players (multiplayer foundation ready)
 - Share resources and strategies
 - Coordinate attacks against bosses
 
 #### Boss Battles
+
 - Each boss has unique abilities and weaknesses
 - Health tracking and damage calculation
 - Special boss mechanics and phases
 
 #### Random Encounters
+
 - Procedurally generated using Perchance system
 - Varying difficulty levels (1-5)
 - Environmental effects and special conditions
 - Rewards and consequences
 
 #### Quest System
+
 - Dynamic quest generation
 - Objective tracking and progress
 - Rewards upon completion
@@ -146,12 +162,14 @@ Select your preferred AI personality in the Deck Builder tab to customize your g
 ### Card Integration
 
 #### Scryfall Integration
+
 - Real MTG card data and images
 - Advanced search capabilities
 - Card legality and format checking
 - Set and expansion support
 
 #### Custom Content
+
 - Foundation for user-generated cards
 - Custom boss abilities
 - Unique encounter mechanics
@@ -160,16 +178,19 @@ Select your preferred AI personality in the Deck Builder tab to customize your g
 ## 🛠️ Technical Architecture
 
 ### Frontend Stack
+
 - **Vanilla JavaScript ES6+**: No framework dependencies
 - **CSS Grid & Flexbox**: Modern layout techniques
 - **Web Standards**: ARIA, semantic HTML, progressive enhancement
 
 ### API Integration
+
 - **Scryfall API**: MTG card data and search
 - **Rate Limiting**: Respectful API usage
 - **Error Handling**: Graceful degradation
 
 ### Data Flow
+
 ```
 User Interaction → Game State → UI Update
                 ↓
@@ -179,6 +200,7 @@ User Interaction → Game State → UI Update
 ```
 
 ### Module Structure
+
 ```
 src/
 ├── ai/
@@ -196,11 +218,13 @@ src/
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 npm test
 ```
 
 ### Test Coverage
+
 - ✅ Game State Management
 - ✅ Perchance Generator Logic
 - ✅ Scryfall API Integration
@@ -214,6 +238,7 @@ npm test
 ## 🤝 Contributing
 
 ### Development Setup
+
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
@@ -226,4 +251,4 @@ MIT License - See LICENSE file for details.
 
 ---
 
-*Built with ❤️ for the Magic: The Gathering community*
+_Built with ❤️ for the Magic: The Gathering community_

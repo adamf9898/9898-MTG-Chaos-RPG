@@ -20,18 +20,18 @@ class GameState {
                 autoTapLands: false,
                 showCardPreviews: true,
                 soundVolume: 50,
-                difficulty: 'normal'
-            }
+                difficulty: 'normal',
+            },
         };
-        
+
         this.observers = [];
         this.gameData = {
             bosses: [],
             encounters: [],
             playerCards: [],
-            customContent: []
+            customContent: [],
         };
-        
+
         this.initializeGameData();
     }
 
@@ -51,7 +51,7 @@ class GameState {
                 resistances: ['black', 'red'],
                 difficulty: 8,
                 defeated: false,
-                location: 'The Chaos Nexus'
+                location: 'The Chaos Nexus',
             },
             {
                 id: 'malachar-corrupted',
@@ -63,7 +63,7 @@ class GameState {
                 resistances: ['black'],
                 difficulty: 6,
                 defeated: false,
-                location: 'The Shadowlands'
+                location: 'The Shadowlands',
             },
             {
                 id: 'nethys-ancient',
@@ -75,8 +75,8 @@ class GameState {
                 resistances: ['blue', 'white'],
                 difficulty: 9,
                 defeated: false,
-                location: 'The Temporal Sanctum'
-            }
+                location: 'The Temporal Sanctum',
+            },
         ];
 
         // Default player template
@@ -92,7 +92,7 @@ class GameState {
             library: [],
             abilities: [],
             experience: 0,
-            level: 1
+            level: 1,
         };
     }
 
@@ -109,7 +109,7 @@ class GameState {
      * @param {Function} callback - Function to remove from observers
      */
     unsubscribe(callback) {
-        this.observers = this.observers.filter(obs => obs !== callback);
+        this.observers = this.observers.filter((obs) => obs !== callback);
     }
 
     /**
@@ -117,7 +117,7 @@ class GameState {
      * @param {Object} change - Details about what changed
      */
     notifyObservers(change) {
-        this.observers.forEach(callback => {
+        this.observers.forEach((callback) => {
             try {
                 callback(this.state, change);
             } catch (error) {
@@ -133,12 +133,12 @@ class GameState {
     updateState(updates) {
         const previousState = { ...this.state };
         this.state = { ...this.state, ...updates };
-        
+
         this.notifyObservers({
             type: 'state_update',
             previous: previousState,
             current: this.state,
-            updates
+            updates,
         });
     }
 
@@ -147,13 +147,13 @@ class GameState {
      * @param {Object} options - Game initialization options
      */
     startNewGame(options = {}) {
-        const players = options.playerCount ? 
-            Array.from({ length: options.playerCount }, (_, i) => ({
-                ...this.defaultPlayer,
-                id: `player-${i + 1}`,
-                name: options.playerNames?.[i] || `Player ${i + 1}`
-            })) : 
-            [{ ...this.defaultPlayer, id: 'player-1', name: 'Player 1' }];
+        const players = options.playerCount
+            ? Array.from({ length: options.playerCount }, (_, i) => ({
+                  ...this.defaultPlayer,
+                  id: `player-${i + 1}`,
+                  name: options.playerNames?.[i] || `Player ${i + 1}`,
+              }))
+            : [{ ...this.defaultPlayer, id: 'player-1', name: 'Player 1' }];
 
         this.updateState({
             gamePhase: 'playing',
@@ -164,12 +164,12 @@ class GameState {
             location: 'Starting Village',
             inventory: [],
             quests: [],
-            defeatedBosses: []
+            defeatedBosses: [],
         });
 
         this.notifyObservers({
             type: 'game_started',
-            options
+            options,
         });
     }
 
@@ -187,7 +187,7 @@ class GameState {
 
         this.notifyObservers({
             type: 'game_loaded',
-            saveData
+            saveData,
         });
     }
 
@@ -200,12 +200,12 @@ class GameState {
             version: '1.0.0',
             timestamp: Date.now(),
             state: { ...this.state },
-            gameData: { ...this.gameData }
+            gameData: { ...this.gameData },
         };
 
         this.notifyObservers({
             type: 'game_saved',
-            saveData
+            saveData,
         });
 
         return saveData;
@@ -216,9 +216,8 @@ class GameState {
      * @param {string|Object} boss - Boss ID or boss object
      */
     startBossEncounter(boss) {
-        const bossData = typeof boss === 'string' ? 
-            this.gameData.bosses.find(b => b.id === boss) : 
-            boss;
+        const bossData =
+            typeof boss === 'string' ? this.gameData.bosses.find((b) => b.id === boss) : boss;
 
         if (!bossData) {
             throw new Error('Boss not found');
@@ -227,12 +226,12 @@ class GameState {
         this.updateState({
             gamePhase: 'boss',
             currentBoss: { ...bossData },
-            currentEncounter: null
+            currentEncounter: null,
         });
 
         this.notifyObservers({
             type: 'boss_encounter_started',
-            boss: bossData
+            boss: bossData,
         });
     }
 
@@ -244,12 +243,12 @@ class GameState {
         this.updateState({
             gamePhase: 'encounter',
             currentEncounter: encounter,
-            currentBoss: null
+            currentBoss: null,
         });
 
         this.notifyObservers({
             type: 'encounter_started',
-            encounter
+            encounter,
         });
     }
 
@@ -272,7 +271,7 @@ class GameState {
             this.notifyObservers({
                 type: 'boss_damaged',
                 damage,
-                boss
+                boss,
             });
         }
     }
@@ -289,24 +288,24 @@ class GameState {
         const newDefeatedBosses = [...this.state.defeatedBosses, defeatedBoss.id];
 
         // Mark boss as defeated in game data
-        const bossIndex = this.gameData.bosses.findIndex(b => b.id === defeatedBoss.id);
+        const bossIndex = this.gameData.bosses.findIndex((b) => b.id === defeatedBoss.id);
         if (bossIndex !== -1) {
             this.gameData.bosses[bossIndex].defeated = true;
         }
 
         // Check for victory condition (all bosses defeated)
-        const allBossesDefeated = this.gameData.bosses.every(boss => boss.defeated);
+        const allBossesDefeated = this.gameData.bosses.every((boss) => boss.defeated);
 
         this.updateState({
             gamePhase: allBossesDefeated ? 'victory' : 'playing',
             currentBoss: null,
-            defeatedBosses: newDefeatedBosses
+            defeatedBosses: newDefeatedBosses,
         });
 
         this.notifyObservers({
             type: 'boss_defeated',
             boss: defeatedBoss,
-            victory: allBossesDefeated
+            victory: allBossesDefeated,
         });
     }
 
@@ -316,11 +315,11 @@ class GameState {
      * @param {Object} card - Card to add
      */
     addCardToHand(playerId, card) {
-        const players = this.state.players.map(player => {
+        const players = this.state.players.map((player) => {
             if (player.id === playerId) {
                 return {
                     ...player,
-                    hand: [...player.hand, card]
+                    hand: [...player.hand, card],
                 };
             }
             return player;
@@ -331,7 +330,7 @@ class GameState {
         this.notifyObservers({
             type: 'card_added_to_hand',
             playerId,
-            card
+            card,
         });
     }
 
@@ -342,15 +341,15 @@ class GameState {
      * @param {string} zone - Target zone ('battlefield', 'graveyard')
      */
     playCard(playerId, card, zone = 'battlefield') {
-        const players = this.state.players.map(player => {
+        const players = this.state.players.map((player) => {
             if (player.id === playerId) {
-                const hand = player.hand.filter(c => c.id !== card.id);
+                const hand = player.hand.filter((c) => c.id !== card.id);
                 const targetZone = [...player[zone], card];
-                
+
                 return {
                     ...player,
                     hand,
-                    [zone]: targetZone
+                    [zone]: targetZone,
                 };
             }
             return player;
@@ -362,7 +361,7 @@ class GameState {
             type: 'card_played',
             playerId,
             card,
-            zone
+            zone,
         });
     }
 
@@ -371,16 +370,19 @@ class GameState {
      * @param {Object} item - Item to add
      */
     addToInventory(item) {
-        const inventory = [...this.state.inventory, {
-            ...item,
-            id: `item-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-        }];
+        const inventory = [
+            ...this.state.inventory,
+            {
+                ...item,
+                id: `item-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            },
+        ];
 
         this.updateState({ inventory });
 
         this.notifyObservers({
             type: 'item_added_to_inventory',
-            item
+            item,
         });
     }
 
@@ -389,18 +391,21 @@ class GameState {
      * @param {Object} quest - Quest to add
      */
     addQuest(quest) {
-        const quests = [...this.state.quests, {
-            ...quest,
-            id: `quest-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-            status: 'active',
-            progress: 0
-        }];
+        const quests = [
+            ...this.state.quests,
+            {
+                ...quest,
+                id: `quest-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                status: 'active',
+                progress: 0,
+            },
+        ];
 
         this.updateState({ quests });
 
         this.notifyObservers({
             type: 'quest_added',
-            quest
+            quest,
         });
     }
 
@@ -410,13 +415,13 @@ class GameState {
      * @param {number} progress - New progress value
      */
     updateQuestProgress(questId, progress) {
-        const quests = this.state.quests.map(quest => {
+        const quests = this.state.quests.map((quest) => {
             if (quest.id === questId) {
                 const completed = progress >= 100;
                 return {
                     ...quest,
                     progress,
-                    status: completed ? 'completed' : 'active'
+                    status: completed ? 'completed' : 'active',
                 };
             }
             return quest;
@@ -427,7 +432,7 @@ class GameState {
         this.notifyObservers({
             type: 'quest_progress_updated',
             questId,
-            progress
+            progress,
         });
     }
 
@@ -440,7 +445,7 @@ class GameState {
 
         this.notifyObservers({
             type: 'location_changed',
-            location
+            location,
         });
     }
 
@@ -454,7 +459,7 @@ class GameState {
 
         this.notifyObservers({
             type: 'settings_updated',
-            settings: gameSettings
+            settings: gameSettings,
         });
     }
 
@@ -467,12 +472,12 @@ class GameState {
             turnCount: this.state.currentTurn,
             bossesDefeated: this.state.defeatedBosses.length,
             totalBosses: this.gameData.bosses.length,
-            activeQuests: this.state.quests.filter(q => q.status === 'active').length,
-            completedQuests: this.state.quests.filter(q => q.status === 'completed').length,
+            activeQuests: this.state.quests.filter((q) => q.status === 'active').length,
+            completedQuests: this.state.quests.filter((q) => q.status === 'completed').length,
             inventorySize: this.state.inventory.length,
             players: this.state.players.length,
             gamePhase: this.state.gamePhase,
-            location: this.state.location
+            location: this.state.location,
         };
     }
 
@@ -490,17 +495,17 @@ class GameState {
             inventory: [],
             quests: [],
             defeatedBosses: [],
-            gameSettings: this.state.gameSettings // Preserve settings
+            gameSettings: this.state.gameSettings, // Preserve settings
         };
 
         // Reset boss defeated status
-        this.gameData.bosses.forEach(boss => {
+        this.gameData.bosses.forEach((boss) => {
             boss.defeated = false;
             boss.health = boss.maxHealth;
         });
 
         this.notifyObservers({
-            type: 'game_reset'
+            type: 'game_reset',
         });
     }
 
@@ -510,7 +515,7 @@ class GameState {
      * @returns {Object|null} Player object or null if not found
      */
     getPlayer(playerId) {
-        return this.state.players.find(player => player.id === playerId) || null;
+        return this.state.players.find((player) => player.id === playerId) || null;
     }
 
     /**
@@ -526,7 +531,7 @@ class GameState {
      * @returns {Array} Array of undefeated boss objects
      */
     getUndefeatedBosses() {
-        return this.gameData.bosses.filter(boss => !boss.defeated);
+        return this.gameData.bosses.filter((boss) => !boss.defeated);
     }
 }
 

@@ -18,11 +18,11 @@ class ScryfallAPI {
     async rateLimit() {
         const now = Date.now();
         const timeSinceLastRequest = now - this.lastRequestTime;
-        
+
         if (timeSinceLastRequest < this.rateLimitDelay) {
             await this.sleep(this.rateLimitDelay - timeSinceLastRequest);
         }
-        
+
         this.lastRequestTime = Date.now();
     }
 
@@ -30,7 +30,7 @@ class ScryfallAPI {
      * Sleep utility for rate limiting
      */
     sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     /**
@@ -38,7 +38,7 @@ class ScryfallAPI {
      */
     async makeRequest(endpoint, useCache = true) {
         const cacheKey = endpoint;
-        
+
         // Check cache first
         if (useCache && this.cache.has(cacheKey)) {
             return this.cache.get(cacheKey);
@@ -46,20 +46,20 @@ class ScryfallAPI {
 
         try {
             await this.rateLimit();
-            
+
             const response = await fetch(`${this.baseURL}${endpoint}`);
-            
+
             if (!response.ok) {
                 throw new Error(`Scryfall API error: ${response.status} ${response.statusText}`);
             }
-            
+
             const data = await response.json();
-            
+
             // Cache successful responses
             if (useCache) {
                 this.cache.set(cacheKey, data);
             }
-            
+
             return data;
         } catch (error) {
             console.error('Scryfall API request failed:', error);
@@ -76,7 +76,7 @@ class ScryfallAPI {
         const params = new URLSearchParams({
             q: query,
             format: 'json',
-            ...options
+            ...options,
         });
 
         return this.makeRequest(`/cards/search?${params}`);
@@ -117,7 +117,7 @@ class ScryfallAPI {
             'cmc>=7 type:creature power>=7',
             'cmc>=6 type:sorcery OR type:instant',
             'type:planeswalker',
-            'type:enchantment cmc>=5'
+            'type:enchantment cmc>=5',
         ];
 
         const results = [];
@@ -144,7 +144,7 @@ class ScryfallAPI {
             'cmc>=3 cmc<=5 type:creature',
             'cmc<=4 type:artifact',
             'type:enchantment cmc<=4',
-            'cmc<=3 (type:instant OR type:sorcery)'
+            'cmc<=3 (type:instant OR type:sorcery)',
         ];
 
         const results = [];
@@ -172,7 +172,7 @@ class ScryfallAPI {
             'cmc<=2 type:instant',
             'cmc<=3 type:sorcery',
             'type:land',
-            'cmc<=4 type:artifact'
+            'cmc<=4 type:artifact',
         ];
 
         const results = [];
@@ -196,22 +196,26 @@ class ScryfallAPI {
      */
     async getCardsByCriteria(criteria) {
         let query = '';
-        
+
         if (criteria.colors) {
             query += `color:${criteria.colors.join('')} `;
         }
-        
+
         if (criteria.types) {
-            query += `(${criteria.types.map(type => `type:${type}`).join(' OR ')}) `;
+            query += `(${criteria.types.map((type) => `type:${type}`).join(' OR ')}) `;
         }
-        
+
         if (criteria.cmc) {
-            if (criteria.cmc.min !== undefined) query += `cmc>=${criteria.cmc.min} `;
-            if (criteria.cmc.max !== undefined) query += `cmc<=${criteria.cmc.max} `;
+            if (criteria.cmc.min !== undefined) {
+                query += `cmc>=${criteria.cmc.min} `;
+            }
+            if (criteria.cmc.max !== undefined) {
+                query += `cmc<=${criteria.cmc.max} `;
+            }
         }
-        
+
         if (criteria.keywords) {
-            query += criteria.keywords.map(kw => `keyword:${kw}`).join(' ');
+            query += criteria.keywords.map((kw) => `keyword:${kw}`).join(' ');
         }
 
         return this.searchCards(query.trim());
@@ -231,7 +235,7 @@ class ScryfallAPI {
                 const response = await this.makeRequest('/cards/random');
                 if (response && response.name) {
                     // Avoid duplicates
-                    if (!cards.find(card => card.name === response.name)) {
+                    if (!cards.find((card) => card.name === response.name)) {
                         cards.push(response);
                     }
                 }
@@ -272,7 +276,7 @@ class ScryfallAPI {
     getCacheStats() {
         return {
             size: this.cache.size,
-            keys: Array.from(this.cache.keys())
+            keys: Array.from(this.cache.keys()),
         };
     }
 }

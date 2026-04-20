@@ -42,7 +42,8 @@ body {
     gap: 1rem;
 }
 
-.nav-btn, .action-btn {
+.nav-btn,
+.action-btn {
     background: linear-gradient(45deg, #4a5568, #2d3748);
     border: 2px solid #ffd700;
     color: #ffffff;
@@ -55,14 +56,16 @@ body {
     font-size: 0.9rem;
 }
 
-.nav-btn:hover, .action-btn:hover {
+.nav-btn:hover,
+.action-btn:hover {
     background: linear-gradient(45deg, #ffd700, #ffed4e);
     color: #1a1a2e;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
 }
 
-.nav-btn:active, .action-btn:active {
+.nav-btn:active,
+.action-btn:active {
     transform: translateY(0);
 }
 
@@ -335,8 +338,12 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive Design */
@@ -345,34 +352,35 @@ body {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
     }
-    
+
     .status-panel {
         grid-row: 1;
     }
-    
+
     .game-header {
         padding: 1rem;
     }
-    
+
     .game-header h1 {
         font-size: 1.5rem;
     }
-    
+
     .main-nav {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    
-    .nav-btn, .action-btn {
+
+    .nav-btn,
+    .action-btn {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
     }
-    
+
     .action-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .mtg-card {
         width: 80px;
         height: 112px;
@@ -381,7 +389,9 @@ body {
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -389,7 +399,8 @@ body {
 }
 
 /* Focus styles for keyboard navigation */
-button:focus, .mtg-card:focus {
+button:focus,
+.mtg-card:focus {
     outline: 2px solid #ffd700;
     outline-offset: 2px;
 }
@@ -399,13 +410,15 @@ button:focus, .mtg-card:focus {
     .game-header {
         background: #000000;
     }
-    
-    .nav-btn, .action-btn {
+
+    .nav-btn,
+    .action-btn {
         background: #000000;
         border: 3px solid #ffffff;
     }
-    
-    .nav-btn:hover, .action-btn:hover {
+
+    .nav-btn:hover,
+    .action-btn:hover {
         background: #ffffff;
         color: #000000;
     }
@@ -439,7 +452,7 @@ button:focus, .mtg-card:focus {
 }
 
 .tab-btn.active {
-    background: linear-gradient(45deg, #8B0000, #DC143C);
+    background: linear-gradient(45deg, #8b0000, #dc143c);
     color: #ffd700;
     border-bottom: 3px solid #ffd700;
 }
@@ -455,7 +468,7 @@ button:focus, .mtg-card:focus {
 /* Forum Section Styles */
 .forum-section {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -478,7 +491,7 @@ button:focus, .mtg-card:focus {
 
 .forum-post {
     background: rgba(139, 0, 0, 0.1);
-    border: 1px solid #8B0000;
+    border: 1px solid #8b0000;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -487,7 +500,7 @@ button:focus, .mtg-card:focus {
 
 .forum-post:hover {
     background: rgba(139, 0, 0, 0.2);
-    border-color: #DC143C;
+    border-color: #dc143c;
 }
 
 .forum-post h3 {
@@ -506,7 +519,7 @@ button:focus, .mtg-card:focus {
 /* Deck Builder Styles */
 .deck-builder-section {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 12px;
     padding: 2rem;
 }
@@ -544,7 +557,7 @@ button:focus, .mtg-card:focus {
 
 .deck-analysis {
     background: rgba(139, 0, 0, 0.1);
-    border: 1px solid #8B0000;
+    border: 1px solid #8b0000;
     border-radius: 8px;
     padding: 1rem;
 }
@@ -570,7 +583,7 @@ button:focus, .mtg-card:focus {
 /* Turn Structure Styles */
 .turn-structure-section {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 12px;
     padding: 2rem;
 }
@@ -582,7 +595,7 @@ button:focus, .mtg-card:focus {
 }
 
 .current-phase {
-    background: linear-gradient(45deg, #8B0000, #DC143C);
+    background: linear-gradient(45deg, #8b0000, #dc143c);
     color: #ffffff;
     padding: 1rem;
     border-radius: 8px;
@@ -601,7 +614,7 @@ button:focus, .mtg-card:focus {
 
 .battlefield-zone {
     background: rgba(139, 0, 0, 0.1);
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 8px;
     padding: 1rem;
     min-height: 150px;
@@ -640,7 +653,7 @@ button:focus, .mtg-card:focus {
 
 .phase-item.active {
     background: rgba(139, 0, 0, 0.2);
-    border-color: #8B0000;
+    border-color: #8b0000;
     color: #ffd700;
 }
 
@@ -664,14 +677,14 @@ button:focus, .mtg-card:focus {
 /* Membership Styles */
 .membership-section {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border: 2px solid #8B0000;
+    border: 2px solid #8b0000;
     border-radius: 12px;
     padding: 2rem;
 }
 
 .membership-intro {
     background: rgba(139, 0, 0, 0.1);
-    border: 1px solid #8B0000;
+    border: 1px solid #8b0000;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -695,7 +708,8 @@ button:focus, .mtg-card:focus {
     font-weight: bold;
 }
 
-.form-group input, .form-group select {
+.form-group input,
+.form-group select {
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
     border: 2px solid #4a5568;
@@ -705,7 +719,8 @@ button:focus, .mtg-card:focus {
     font-size: 1rem;
 }
 
-.form-group input:focus, .form-group select:focus {
+.form-group input:focus,
+.form-group select:focus {
     border-color: #ffd700;
     outline: none;
     box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
@@ -713,7 +728,7 @@ button:focus, .mtg-card:focus {
 
 .terms-section {
     background: rgba(139, 0, 0, 0.1);
-    border: 1px solid #8B0000;
+    border: 1px solid #8b0000;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 2rem;
@@ -736,7 +751,7 @@ button:focus, .mtg-card:focus {
     cursor: pointer;
 }
 
-.checkbox-label input[type="checkbox"] {
+.checkbox-label input[type='checkbox'] {
     width: auto;
 }
 
@@ -744,7 +759,7 @@ button:focus, .mtg-card:focus {
     width: 100%;
     padding: 1rem;
     font-size: 1.1rem;
-    background: linear-gradient(45deg, #8B0000, #DC143C);
+    background: linear-gradient(45deg, #8b0000, #dc143c);
 }
 
 /* Booster Pack Card Styles */
@@ -793,16 +808,16 @@ button:focus, .mtg-card:focus {
     .forum-tabs {
         flex-wrap: wrap;
     }
-    
+
     .tab-btn {
         flex: 1;
         min-width: 120px;
     }
-    
+
     .deck-area {
         grid-template-columns: 1fr;
     }
-    
+
     .battlefield-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
@@ -824,7 +839,8 @@ button:focus, .mtg-card:focus {
 }
 
 @keyframes ai-pulse {
-    0%, 100% {
+    0%,
+    100% {
         box-shadow: 0 2px 4px rgba(102, 126, 234, 0.4);
     }
     50% {
@@ -900,7 +916,7 @@ button:focus, .mtg-card:focus {
 }
 
 .consequences li::before {
-    content: "⚠️";
+    content: '⚠️';
     position: absolute;
     left: 0;
 }

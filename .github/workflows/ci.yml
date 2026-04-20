@@ -1,0 +1,56 @@
+name: CI
+
+on:
+    push:
+        branches: ['main', 'develop']
+    pull_request:
+        branches: ['main', 'develop']
+
+permissions:
+    contents: read
+
+jobs:
+    lint-and-test:
+        name: Lint & Test
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci --legacy-peer-deps
+
+            - name: Lint (ESLint)
+              run: npm run lint
+
+            - name: Format check (Prettier)
+              run: npm run format:check
+
+            - name: Run tests
+              run: npm test
+
+    codeql:
+        name: CodeQL Security Scan
+        runs-on: ubuntu-latest
+        permissions:
+            security-events: write
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v3
+              with:
+                  languages: javascript
+
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v3

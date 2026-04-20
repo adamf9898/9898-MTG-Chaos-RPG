@@ -1,0 +1,62 @@
+name: League Rollover
+
+on:
+    # Run every weekday at 02:30 UTC (after the Pages deploy at 02:00)
+    schedule:
+        - cron: '30 2 * * 1-5'
+
+    # Allow manual trigger from the Actions tab
+    workflow_dispatch:
+        inputs:
+            advance_season:
+                description: 'Advance to a new season after updating standings?'
+                required: false
+                default: 'false'
+                type: choice
+                options:
+                    - 'false'
+                    - 'true'
+
+permissions:
+    contents: write # needed to commit updated standings JSON
+
+jobs:
+    rollover:
+        name: Update League Standings
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  # Fetch full history so git blame / log works in scripts
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci --legacy-peer-deps
+
+            - name: Run league rollover
+              run: |
+                  if [ "${{ github.event.inputs.advance_season }}" = "true" ]; then
+                    node src/league/leagueRollover.js --advance
+                  else
+                    node src/league/leagueRollover.js
+                  fi
+
+            - name: Commit updated standings
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git add data/league/
+                  if git diff --cached --quiet; then
+                    echo "No changes to standings — nothing to commit"
+                  else
+                    git commit -m "chore(league): update standings [skip ci]"
+                    git push
+                  fi
