@@ -1,0 +1,5 @@
+# MTGJSON bulk data is downloaded by tools/fetch-mtgjson.js
+# Do not commit this file — it is large and refreshed nightly
+AtomicCards.json
+AllCards.json
+AllPrintings.json

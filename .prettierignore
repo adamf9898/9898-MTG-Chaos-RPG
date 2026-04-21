@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build/
+coverage/
+*.min.js
+# Pre-existing HTML files with markup that confuses the Prettier HTML parser
+index.html
+web-rpg-game.html

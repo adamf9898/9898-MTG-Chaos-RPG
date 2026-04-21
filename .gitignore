@@ -132,3 +132,8 @@ logs/
 dist/
 build/
 out/
+
+# MTGJSON bulk data (downloaded by tools/fetch-mtgjson.js)
+data/mtgjson/AtomicCards.json
+data/mtgjson/AllCards.json
+data/mtgjson/AllPrintings.json
