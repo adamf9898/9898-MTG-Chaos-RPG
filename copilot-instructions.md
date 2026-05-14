@@ -5,6 +5,7 @@ This file provides context and guidelines for GitHub Copilot to assist with deve
 ## Project Overview
 
 9898-MTG Chaos RPG is a comprehensive Magic: The Gathering Chaos RPG implementation featuring:
+
 - Cooperative gameplay with dynamic encounters
 - Integration with the Scryfall API for real MTG card data
 - AI-driven content generation with multiple personality modes
@@ -64,6 +65,7 @@ tests/
 - **Comments**: JSDoc-style comments for classes and public methods
 
 Example:
+
 ```javascript
 /**
  * Fetches card data from Scryfall API
@@ -105,11 +107,12 @@ async searchCards(query) {
 - **Caching**: Cache responses to minimize API calls
 - **Error Handling**: Graceful degradation when API is unavailable
 - **Endpoints Used**:
-  - `/cards/search` - Search for cards
-  - `/cards/named` - Get specific card by name
-  - `/cards/random` - Get random card
+    - `/cards/search` - Search for cards
+    - `/cards/named` - Get specific card by name
+    - `/cards/random` - Get random card
 
 Example:
+
 ```javascript
 // Always use rate limiting
 await this.rateLimit();
@@ -120,8 +123,8 @@ const response = await fetch(`${this.baseUrl}/cards/search?q=${query}`);
 
 - **Personality Modes**: Default, Cautious, Experimental, Reckless
 - **Parameters**:
-  - Creativity: 50-90% (affects content variety)
-  - Danger: 30-90% (affects difficulty scaling)
+    - Creativity: 50-90% (affects content variety)
+    - Danger: 30-90% (affects difficulty scaling)
 - **Content Generation**: Encounters, quests, narratives, boss tactics
 
 ## Testing Guidelines
@@ -142,12 +145,14 @@ npm test  # Runs core.test.js
 ### Adding Tests
 
 When adding new features:
+
 1. Add corresponding tests to `tests/core.test.js`
 2. Follow existing test patterns
 3. Test both success and error cases
 4. Use descriptive test names
 
 Example:
+
 ```javascript
 test('AI Service generates encounter with correct personality settings', async () => {
     const encounter = await aiService.generateEncounter('default');
@@ -168,24 +173,24 @@ npm run serve         # Start development server on port 8000
 ### File Modification Guidelines
 
 1. **Adding New Generators**: Edit `src/generators/perchance.js`
-   - Add to `initializeDefaultGenerators()` method
-   - Follow existing generator structure with weighted items
-   - Support nested generators using `[generatorName]` syntax
+    - Add to `initializeDefaultGenerators()` method
+    - Follow existing generator structure with weighted items
+    - Support nested generators using `[generatorName]` syntax
 
 2. **Adding New Bosses**: Edit `src/core/gameState.js`
-   - Add to `gameData.bosses` array in `initializeGameData()`
-   - Include: id, name, health, abilities, weaknesses, resistances, difficulty, location
+    - Add to `gameData.bosses` array in `initializeGameData()`
+    - Include: id, name, health, abilities, weaknesses, resistances, difficulty, location
 
 3. **Extending Scryfall Integration**: Edit `src/api/scryfall.js`
-   - Add new methods following existing patterns
-   - Always implement rate limiting
-   - Handle errors with fallback options
+    - Add new methods following existing patterns
+    - Always implement rate limiting
+    - Handle errors with fallback options
 
 4. **UI Changes**: Edit `index.html`, `styles/main.css`, `js/main.js`
-   - Test on multiple screen sizes
-   - Verify keyboard navigation
-   - Check color contrast
-   - Ensure responsive design
+    - Test on multiple screen sizes
+    - Verify keyboard navigation
+    - Check color contrast
+    - Ensure responsive design
 
 ## Common Patterns
 
@@ -213,10 +218,7 @@ const result = perchanceGenerator.generate('encounterType');
 // Add nested generator references
 this.addGenerator('quest', {
     weight: 1,
-    items: [
-        'Retrieve the [magicalItem] from [location]',
-        'Defeat [enemyType] in [location]'
-    ]
+    items: ['Retrieve the [magicalItem] from [location]', 'Defeat [enemyType] in [location]'],
 });
 ```
 
@@ -307,6 +309,7 @@ When implementing AI features:
 - **Reckless** (Creativity: 80%, Danger: 90%): High-risk, high-reward
 
 Personality affects:
+
 - Encounter generation
 - Boss tactics
 - Quest difficulty and variety

@@ -1,0 +1,11 @@
+# Validate conventional commit message format
+commit_msg=$(cat "$1")
+pattern="^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?: .{1,100}"
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo "❌ Commit message must follow Conventional Commits format:"
+  echo "   <type>(<scope>): <description>"
+  echo ""
+  echo "   Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert"
+  echo "   Example: feat(boss): add Nicol Bolas phase transition"
+  exit 1
+fi

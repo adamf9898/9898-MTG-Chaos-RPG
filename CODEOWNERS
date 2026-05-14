@@ -1,0 +1,24 @@
+# CODEOWNERS for 9898-MTG Chaos RPG
+# Each line is a pattern followed by one or more owners.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for all files
+* @adamf9898
+
+# Core game logic
+/src/core/ @adamf9898
+/src/ai/ @adamf9898
+/src/generators/ @adamf9898
+/src/api/ @adamf9898
+/src/services/ @adamf9898
+
+# League system
+/src/league/ @adamf9898
+/data/league/ @adamf9898
+
+# CI / automation
+/.github/ @adamf9898
+
+# Documentation
+/docs/ @adamf9898
+*.md @adamf9898
