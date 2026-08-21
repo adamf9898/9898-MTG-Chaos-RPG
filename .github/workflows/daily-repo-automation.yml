@@ -50,15 +50,14 @@ jobs:
                   echo "git_commit=$(git rev-parse HEAD)" >> reports/generated/repo-env-snapshot.txt
                   git ls-files > reports/generated/repository-files.txt
 
-            - name: Run iteration and improvement scripts (if present)
+            - name: Run iteration and improvement scripts
               run: |
-                  npm run analyze --if-present
+                  # Single pass: analyze repo, apply safe auto-fixes, write report.
+                  npm run iterate
+                  # Optional extension points (no-op unless defined).
                   npm run deep-research --if-present
-                  npm run iterate --if-present
-                  npm run improve --if-present
                   npm run integrate --if-present
                   npm run implement --if-present
-                  npm run automation:apply --if-present
 
             - name: Upload generated artifacts
               if: always()

@@ -2,6 +2,8 @@ node_modules/
 dist/
 build/
 coverage/
+# Machine-generated automation artifacts
+reports/generated/
 *.min.js
 # Pre-existing HTML files with markup that confuses the Prettier HTML parser
 index.html

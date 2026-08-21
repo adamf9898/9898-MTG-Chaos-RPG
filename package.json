@@ -13,6 +13,10 @@
         "lint:fix": "eslint src/ js/ tests/ tools/ eslint.config.js --ext .js --fix",
         "format": "prettier --write \"**/*.{js,json,css,html,md,yml}\"",
         "format:check": "prettier --check \"**/*.{js,json,css,html,md,yml}\"",
+        "analyze": "node tools/iterate-improvements.js --analyze",
+        "iterate": "node tools/iterate-improvements.js",
+        "improve": "node tools/iterate-improvements.js",
+        "automation:apply": "node tools/iterate-improvements.js",
         "serve": "python3 -m http.server 8000",
         "serve:node": "npx http-server . -p 8000 -c-1",
         "prepare": "husky"
