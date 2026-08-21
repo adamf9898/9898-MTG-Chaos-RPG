@@ -168,9 +168,7 @@ When adding new features, include tests:
     ```javascript
     test('My New Feature', async () => {
         // Setup
-        const mockData = {
-            /* test data */
-        };
+        const mockData = {/* test data */};
 
         // Execute
         const result = myNewFunction(mockData);
