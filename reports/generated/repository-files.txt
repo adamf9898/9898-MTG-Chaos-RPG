@@ -43,6 +43,8 @@ js/main.js
 mechanics-development.md
 package-lock.json
 package.json
+reports/generated/repo-env-snapshot.txt
+reports/generated/repository-files.txt
 src/ai/aiService.js
 src/ai/providers/base.js
 src/ai/providers/hosted.js
