@@ -1,85 +1,85 @@
 name: Daily Repository Automation
 
 on:
-  workflow_dispatch:
-  schedule:
-    # Daily at 05:30 UTC
-    - cron: "30 5 * * *"
+    workflow_dispatch:
+    schedule:
+        # Daily at 05:30 UTC
+        - cron: '30 5 * * *'
 
 permissions:
-  contents: write
-  pull-requests: write
+    contents: write
+    pull-requests: write
 
 concurrency:
-  group: daily-repo-automation
-  cancel-in-progress: false
+    group: daily-repo-automation
+    cancel-in-progress: false
 
 jobs:
-  automate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 240
+    automate:
+        runs-on: ubuntu-latest
+        timeout-minutes: 240
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '24'
 
-      - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          elif [ -f package.json ]; then
-            npm install
-          fi
+            - name: Install dependencies
+              run: |
+                  if [ -f package-lock.json ]; then
+                    npm ci
+                  elif [ -f package.json ]; then
+                    npm install
+                  fi
 
-      - name: Analyze repository + environment snapshot
-        run: |
-          mkdir -p reports/generated
-          echo "generated_at=$(date -u +%FT%TZ)" > reports/generated/repo-env-snapshot.txt
-          echo "runner_os=$RUNNER_OS" >> reports/generated/repo-env-snapshot.txt
-          echo "runner_arch=$RUNNER_ARCH" >> reports/generated/repo-env-snapshot.txt
-          echo "node_version=$(node -v)" >> reports/generated/repo-env-snapshot.txt
-          echo "npm_version=$(npm -v)" >> reports/generated/repo-env-snapshot.txt
-          echo "git_branch=$(git rev-parse --abbrev-ref HEAD)" >> reports/generated/repo-env-snapshot.txt
-          echo "git_commit=$(git rev-parse HEAD)" >> reports/generated/repo-env-snapshot.txt
-          git ls-files > reports/generated/repository-files.txt
+            - name: Analyze repository + environment snapshot
+              run: |
+                  mkdir -p reports/generated
+                  echo "generated_at=$(date -u +%FT%TZ)" > reports/generated/repo-env-snapshot.txt
+                  echo "runner_os=$RUNNER_OS" >> reports/generated/repo-env-snapshot.txt
+                  echo "runner_arch=$RUNNER_ARCH" >> reports/generated/repo-env-snapshot.txt
+                  echo "node_version=$(node -v)" >> reports/generated/repo-env-snapshot.txt
+                  echo "npm_version=$(npm -v)" >> reports/generated/repo-env-snapshot.txt
+                  echo "git_branch=$(git rev-parse --abbrev-ref HEAD)" >> reports/generated/repo-env-snapshot.txt
+                  echo "git_commit=$(git rev-parse HEAD)" >> reports/generated/repo-env-snapshot.txt
+                  git ls-files > reports/generated/repository-files.txt
 
-      - name: Run iteration and improvement scripts (if present)
-        run: |
-          npm run analyze --if-present
-          npm run deep-research --if-present
-          npm run iterate --if-present
-          npm run improve --if-present
-          npm run integrate --if-present
-          npm run implement --if-present
-          npm run automation:apply --if-present
+            - name: Run iteration and improvement scripts (if present)
+              run: |
+                  npm run analyze --if-present
+                  npm run deep-research --if-present
+                  npm run iterate --if-present
+                  npm run improve --if-present
+                  npm run integrate --if-present
+                  npm run implement --if-present
+                  npm run automation:apply --if-present
 
-      - name: Upload generated artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: daily-repo-automation-reports
-          path: |
-            reports/generated/**
-            docs/reports/**
-          if-no-files-found: warn
+            - name: Upload generated artifacts
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: daily-repo-automation-reports
+                  path: |
+                      reports/generated/**
+                      docs/reports/**
+                  if-no-files-found: warn
 
-      - name: Create pull request for improvements
-        continue-on-error: true
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: automation/daily-repo-iteration
-          delete-branch: false
-          commit-message: |
-            chore: daily repository automation updates
+            - name: Create pull request for improvements
+              continue-on-error: true
+              uses: peter-evans/create-pull-request@v7
+              with:
+                  branch: automation/daily-repo-iteration
+                  delete-branch: false
+                  commit-message: |
+                      chore: daily repository automation updates
 
-            Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
-          title: "chore: daily repository automation updates"
-          body: |
-            Automated daily repository analysis + iteration + improvement run.
+                      Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+                  title: 'chore: daily repository automation updates'
+                  body: |
+                      Automated daily repository analysis + iteration + improvement run.

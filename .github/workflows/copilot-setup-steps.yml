@@ -21,7 +21,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v6
 
-            - name: Setup Node.js (LTS 18)
+            - name: Setup Node.js (LTS 20)
               uses: actions/setup-node@v6
               with:
                   node-version-file: '.nvmrc'
