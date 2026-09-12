@@ -39,15 +39,15 @@
     "author": "9898-MTG",
     "license": "MIT",
     "dependencies": {
-        "axios": "^1.18.0"
+        "axios": "^1.20.0"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@types/node": "^26.0.1",
-        "eslint": "^10.6.0",
+        "@types/node": "^26.4.1",
+        "eslint": "^10.9.1",
         "husky": "^9.1.7",
-        "lint-staged": "^17.0.8",
-        "prettier": "^3.9.1"
+        "lint-staged": "^17.4.1",
+        "prettier": "^3.9.6"
     },
     "engines": {
         "node": ">=20.0.0"
