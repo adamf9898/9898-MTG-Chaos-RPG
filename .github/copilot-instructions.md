@@ -38,7 +38,7 @@ npm run format:check            # Prettier check (CI)
 | -------------- | ----------------------------------------------------------------- |
 | Language       | Vanilla JavaScript ES6+ (no framework)                            |
 | Module System  | ES6 modules (`type: "module"`)                                    |
-| Runtime        | Browser + Node 18 for dev/test/tools                              |
+| Runtime        | Browser + Node 20 for dev/test/tools                              |
 | Styling        | Modern CSS (Grid, Flexbox, Custom Properties)                     |
 | Card Data      | Scryfall API (online) / MTGJSON (offline cache)                   |
 | Procedural Gen | Perchance-compatible generator (`src/generators/perchance.js`)    |
