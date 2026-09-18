@@ -15,6 +15,7 @@
         "format:check": "prettier --check \"**/*.{js,json,css,html,md,yml}\"",
         "serve": "python3 -m http.server 8000",
         "serve:node": "npx http-server . -p 8000 -c-1",
+        "wiki:sync": "node tools/manage-wiki.js",
         "prepare": "husky"
     },
     "lint-staged": {

@@ -1,0 +1,72 @@
+name: Weekly Wiki Sync
+
+on:
+    workflow_dispatch:
+    schedule:
+        # Every Monday at 06:00 UTC
+        - cron: '0 6 * * 1'
+
+permissions:
+    contents: write
+
+concurrency:
+    group: weekly-wiki-sync
+    cancel-in-progress: false
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+
+            - name: Clone wiki
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  WIKI_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+                  if ! git clone --depth 1 "$WIKI_URL" wiki 2>/tmp/wiki-clone.err; then
+                    echo "Wiki repo not initialised yet - creating a fresh one."
+                    cat /tmp/wiki-clone.err || true
+                    mkdir -p wiki
+                    cd wiki
+                    git init -b master
+                    git remote add origin "$WIKI_URL"
+                    echo "# Wiki bootstrap" > Home.md
+                    git add Home.md
+                    git -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                        -c user.name="github-actions[bot]" \
+                        commit -m "chore(wiki): bootstrap"
+                    git push -u origin master
+                    cd ..
+                  fi
+
+            - name: Generate wiki pages
+              run: node tools/manage-wiki.js --out wiki
+
+            - name: Commit and push wiki changes
+              working-directory: wiki
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config user.name "github-actions[bot]"
+                  git add -A
+                  if git diff --cached --quiet; then
+                    echo "No wiki changes to commit."
+                    exit 0
+                  fi
+                  git commit -m "chore(wiki): weekly automated sync
+
+                  Regenerated from repository content by tools/manage-wiki.js.
+                  Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+                  git push origin HEAD
