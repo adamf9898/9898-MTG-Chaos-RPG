@@ -4,11 +4,12 @@
  * Compatible with Perchance syntax and patterns
  */
 
-class PerchanceGenerator {
+export class PerchanceGenerator {
     constructor() {
         this.generators = new Map();
         this.variables = new Map();
         this.history = [];
+        this.lastDiagnostics = [];
         this.initializeDefaultGenerators();
     }
 
@@ -273,6 +274,56 @@ class PerchanceGenerator {
                 'planeswalker spark',
                 'ancient wisdom',
             ],
+            bossArtifact: [
+                'the Worldheart Engine',
+                'a blade forged from a fallen star',
+                'the Obsidian Codex',
+                'a crown of fractured mana',
+            ],
+            bossType: ['dragon', 'demon', 'elemental', 'Eldrazi horror'],
+            minionType: ['goblin raiders', 'spectral warriors', 'corrupted beasts'],
+            bossChallenge: [
+                'a trial of strength',
+                'a battle across shifting planes',
+                'a test of the party’s resolve',
+            ],
+            bossSpecialAbility: [
+                'an aura that unravels magic',
+                'the power to fracture time',
+                'a storm of living shadows',
+            ],
+            encounterEvent: [
+                'a planar rift tears open',
+                'a desperate caravan seeks help',
+                'an ancient spell awakens',
+            ],
+            encounterCreature: ['chaos-twisted hydra', 'wandering wurm', 'phantom knight'],
+            encounterDemand: ['a rare spell', 'a promise of safe passage', 'a worthy duel'],
+            encounterTreasure: ['a sealed vault', 'a cache of mana crystals', 'a lost relic'],
+            encounterGuardian: ['a stone colossus', 'a sphinx', 'a pair of rival mages'],
+            encounterMagic: ['unstable mana', 'an illusion', 'a strange enchantment'],
+            encounterNPC: ['a masked planeswalker', 'a stranded scholar', 'a wary merchant'],
+            encounterTrap: ['a rune-charged snare', 'a shifting floor', 'a false portal'],
+            encounterReward: ['a hidden sanctuary', 'an enchanted cache', 'a forgotten map'],
+            treasureType: ['cache', 'chest', 'reliquary'],
+            treasureQuality: ['uncommon', 'rare', 'legendary'],
+            artifactType: ['compass', 'signet', 'planar lens'],
+            gemType: ['opal', 'sapphire', 'emberstone'],
+            spellType: ['the Unbinding', 'the Final Spark', 'Forgotten Paths'],
+            weaponType: ['sword', 'spear', 'warhammer'],
+            creatorType: ['a dwarven forge', 'the Izzet League', 'a planeswalker artificer'],
+            questItem: ['the Ember Shard', 'a sealed scroll', 'the lost signet'],
+            questLocation: ['the Sunken Archive', 'a shifting labyrinth', 'the Ashen Wilds'],
+            questTarget: ['the rogue mage', 'a rampaging elemental', 'the thief in the mist'],
+            questTimeLimit: ['the next moonrise', 'three days', 'the storm’s arrival'],
+            questNPC: ['the village healer', 'an exiled knight', 'a stranded merchant'],
+            questEvent: ['a dangerous crossing', 'the night watch', 'a siege'],
+            questQuantity: ['three', 'seven', 'a dozen'],
+            questResource: ['mana crystals', 'healing herbs', 'lost spell pages'],
+            questReason: ['the village’s protection', 'an ancient pact', 'a cure'],
+            questMystery: ['the vanishing stars', 'a string of strange dreams', 'the silent bells'],
+            cardVerb: ['banish', 'shatter', 'awaken', 'bind'],
+            cardTitle: ['Dread', 'Forgotten', 'Eternal', 'Wandering'],
         };
 
         Object.entries(generators).forEach(([name, items]) => {
@@ -305,10 +356,13 @@ class PerchanceGenerator {
             throw new Error(`Generator '${generatorName}' not found`);
         }
 
-        let result = this.selectRandomItem(generator.items);
-
-        // Process any nested generator references [generatorName]
-        result = this.processNestedGenerators(result);
+        this.lastDiagnostics = [];
+        const result = this.expandNestedGenerators(
+            this.selectRandomItem(generator.items),
+            [generatorName],
+            0,
+            { expansions: 0, limitReported: false }
+        );
 
         // Store in history if requested
         if (options.recordHistory !== false) {
@@ -323,29 +377,46 @@ class PerchanceGenerator {
     }
 
     /**
-     * Process nested generator references in the format [generatorName]
+     * Process nested generator references in the format [generatorName].
+     * Missing and cyclic references are preserved and reported in lastDiagnostics.
      * @param {string} text - Text containing potential generator references
      */
     processNestedGenerators(text) {
-        const generatorRegex = /\[([^\]]+)\]/g;
-        let result = text;
-        let match;
-        let iterations = 0;
-        const maxIterations = 10; // Prevent infinite loops
+        this.lastDiagnostics = [];
+        return this.expandNestedGenerators(text, [], 0, { expansions: 0, limitReported: false });
+    }
 
-        while ((match = generatorRegex.exec(result)) !== null && iterations < maxIterations) {
-            const generatorName = match[1];
-
-            if (this.generators.has(generatorName)) {
-                const replacement = this.generate(generatorName, { recordHistory: false });
-                result = result.replace(match[0], replacement);
-                generatorRegex.lastIndex = 0; // Reset regex for next iteration
+    expandNestedGenerators(text, ancestry, depth, context) {
+        return String(text).replace(/\[([^\]]+)\]/g, (reference, generatorName) => {
+            context.expansions += 1;
+            if (context.expansions > 100) {
+                if (!context.limitReported) {
+                    this.lastDiagnostics.push({ type: 'expansion-limit', path: ancestry });
+                    context.limitReported = true;
+                }
+                return reference;
             }
 
-            iterations++;
-        }
+            const path = [...ancestry, generatorName];
+            if (!this.generators.has(generatorName)) {
+                this.lastDiagnostics.push({ type: 'missing-reference', path });
+                return reference;
+            }
 
-        return result;
+            if (ancestry.includes(generatorName)) {
+                this.lastDiagnostics.push({ type: 'cycle-reference', path });
+                return reference;
+            }
+
+            if (depth >= 10) {
+                this.lastDiagnostics.push({ type: 'depth-limit', path });
+                return reference;
+            }
+
+            const generator = this.generators.get(generatorName);
+            const replacement = this.selectRandomItem(generator.items);
+            return this.expandNestedGenerators(replacement, path, depth + 1, context);
+        });
     }
 
     /**

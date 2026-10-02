@@ -12,7 +12,7 @@
 import scryfallAPI from '../api/scryfall.js';
 import mtgjsonProvider from './mtgjson.js';
 
-class CardSource {
+export class CardSource {
     constructor() {
         /** @type {'scryfall' | 'mtgjson' | 'auto'} */
         this.provider = 'auto';
@@ -117,6 +117,34 @@ class CardSource {
         } catch (error) {
             console.error('[CardSource] getRandomCard failed:', error);
             return null;
+        }
+    }
+
+    /**
+     * Get a unique set of random cards.
+     * @param {number} count
+     * @returns {Promise<Array<object>>}
+     */
+    async getRandomCards(count = 15) {
+        try {
+            const provider = await this._resolveProvider();
+            if (provider === 'scryfall') {
+                return await scryfallAPI.getRandomCards(count);
+            }
+
+            const cards = [];
+            let attempts = 0;
+            while (cards.length < count && attempts < count * 2) {
+                const card = await mtgjsonProvider.getRandomCard();
+                if (card && !cards.some((existing) => existing.name === card.name)) {
+                    cards.push(card);
+                }
+                attempts += 1;
+            }
+            return cards;
+        } catch (error) {
+            console.error('[CardSource] getRandomCards failed:', error);
+            return [];
         }
     }
 
