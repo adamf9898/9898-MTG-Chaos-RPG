@@ -63,27 +63,35 @@ export function runProcess(command, args, { cwd = ROOT, timeoutMs = CHECK_TIMEOU
             spawnError = error;
         });
 
+        const signalProcessTree = (signal) => {
+            if (!child.pid) {
+                return;
+            }
+            if (process.platform === 'win32') {
+                const args = ['/pid', String(child.pid), '/t'];
+                if (signal === 'SIGKILL') {
+                    args.push('/f');
+                }
+                const killer = spawn('taskkill.exe', args, {
+                    stdio: 'ignore',
+                    windowsHide: true,
+                    shell: false,
+                });
+                killer.on('error', () => child.kill(signal));
+                return;
+            }
+            try {
+                process.kill(-child.pid, signal);
+            } catch {
+                child.kill(signal);
+            }
+        };
+
         const timeout = setTimeout(() => {
             timedOut = true;
-            try {
-                if (child.pid && process.platform !== 'win32') {
-                    process.kill(-child.pid, 'SIGTERM');
-                } else {
-                    child.kill('SIGTERM');
-                }
-            } catch {
-                child.kill('SIGTERM');
-            }
+            signalProcessTree('SIGTERM');
             escalationTimer = setTimeout(() => {
-                try {
-                    if (child.pid && process.platform !== 'win32') {
-                        process.kill(-child.pid, 'SIGKILL');
-                    } else {
-                        child.kill('SIGKILL');
-                    }
-                } catch {
-                    child.kill('SIGKILL');
-                }
+                signalProcessTree('SIGKILL');
             }, 1000);
             escalationTimer.unref();
         }, timeoutMs);
