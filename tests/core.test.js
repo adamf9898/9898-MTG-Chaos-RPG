@@ -337,9 +337,3 @@ describe('MTG Chaos RPG Core Tests', () => {
         assert.strictEqual(dangerousEncounter.difficulty >= 3, true);
     });
 });
-
-console.log('Running MTG Chaos RPG tests...');
-console.log('All mock tests passed! The core structure is validated.');
-console.log(
-    'Note: These are structural tests. Integration tests require running in browser environment.'
-);

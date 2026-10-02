@@ -1,8 +1,10 @@
 /**
- * Perchance-compatible Generator System
- * Implements random generation for encounters, quests, loot, and story elements
- * Compatible with Perchance syntax and patterns
+ * Lightweight Perchance-style generator for encounter, quest, loot, and story text.
+ * Supports this repository's [generatorName] references, not the full Perchance runtime.
  */
+
+const MAX_NESTED_GENERATOR_DEPTH = 10;
+const MAX_GENERATOR_EXPANSIONS = 100;
 
 export class PerchanceGenerator {
     constructor() {
@@ -389,7 +391,7 @@ export class PerchanceGenerator {
     expandNestedGenerators(text, ancestry, depth, context) {
         return String(text).replace(/\[([^\]]+)\]/g, (reference, generatorName) => {
             context.expansions += 1;
-            if (context.expansions > 100) {
+            if (context.expansions > MAX_GENERATOR_EXPANSIONS) {
                 if (!context.limitReported) {
                     this.lastDiagnostics.push({ type: 'expansion-limit', path: ancestry });
                     context.limitReported = true;
@@ -408,7 +410,7 @@ export class PerchanceGenerator {
                 return reference;
             }
 
-            if (depth >= 10) {
+            if (depth >= MAX_NESTED_GENERATOR_DEPTH) {
                 this.lastDiagnostics.push({ type: 'depth-limit', path });
                 return reference;
             }

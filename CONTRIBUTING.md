@@ -6,7 +6,7 @@ We welcome contributions from the Magic: The Gathering and gaming community! Thi
 
 ### Prerequisites
 
-- Node.js 18 or higher
+- Node.js 22.22.1 or higher (see `.nvmrc`)
 - Modern web browser with ES6 module support
 - Basic knowledge of JavaScript, HTML, and CSS
 - Familiarity with Magic: The Gathering rules and mechanics
@@ -21,13 +21,21 @@ We welcome contributions from the Magic: The Gathering and gaming community! Thi
     ```
 3. **Install dependencies**:
     ```bash
-    npm install
+    npm ci --legacy-peer-deps
     ```
 4. **Start the development server**:
     ```bash
     npm run serve
     ```
 5. **Open your browser** to `http://localhost:8000`
+
+### Verification
+
+Run `npm run verify` before submitting changes. It checks configured project
+assets, runs ESLint, checks Prettier formatting, and runs every test under
+`tests/`. Each check is bounded to four minutes. Reports are written to
+`reports/generated/` locally and are ignored by Git; CI uploads them as
+artifacts.
 
 ## 🛠️ Development Guidelines
 
@@ -56,7 +64,9 @@ We welcome contributions from the Magic: The Gathering and gaming community! Thi
 │   └── generators/
 │       └── perchance.js    # Perchance-compatible generators
 └── tests/
-    └── core.test.js        # Test suite
+    ├── core.test.js        # Existing structural tests
+    ├── production.test.js
+    └── quality-audit.test.js
 ```
 
 ### Coding Standards

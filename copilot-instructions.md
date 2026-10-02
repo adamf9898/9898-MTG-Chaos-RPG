@@ -18,7 +18,7 @@ This file provides context and guidelines for GitHub Copilot to assist with deve
 
 - **Language**: Vanilla JavaScript ES6+ (no frameworks)
 - **Module System**: ES6 modules with `type: "module"` in package.json
-- **Runtime**: Browser-based with Node.js 18+ for development
+- **Runtime**: Browser-based with Node.js 22.22.1+ for development (`.nvmrc`)
 - **Styling**: Modern CSS (Grid, Flexbox, Custom Properties)
 - **API Integration**: Scryfall API for MTG card data
 - **Testing**: Node.js built-in test runner
@@ -36,14 +36,19 @@ src/
 ├── core/
 │   └── gameState.js         # Game state management with observer pattern
 ├── generators/
-│   └── perchance.js         # Perchance-compatible content generators
+│   └── perchance.js         # JavaScript generator with [generatorName] references
+├── services/
+│   ├── cardSource.js        # Scryfall / MTGJSON adapter
+│   └── mtgjson.js           # Offline card provider
 └── prompt.md                # Feature implementation menu
 
 js/
 └── main.js                  # Main application controller
 
 tests/
-└── core.test.js             # Test suite
+├── core.test.js             # Legacy structural tests
+├── production.test.js       # Production-module regression coverage
+└── quality-audit.test.js
 ```
 
 ### Design Patterns
@@ -137,16 +142,16 @@ npm test  # Runs core.test.js
 
 ### Test Structure
 
-- Tests are in `tests/core.test.js`
+- Tests live under `tests/`
 - Use Node.js built-in `assert` module
 - Test game state management, generators, API integration, AI service
-- Mock external dependencies (Scryfall API calls)
+- Mock external dependencies; never make live API calls in tests
 
 ### Adding Tests
 
 When adding new features:
 
-1. Add corresponding tests to `tests/core.test.js`
+1. Add corresponding regression tests under `tests/`
 2. Follow existing test patterns
 3. Test both success and error cases
 4. Use descriptive test names
@@ -166,8 +171,9 @@ test('AI Service generates encounter with correct personality settings', async (
 ### Starting Development
 
 ```bash
-npm install           # Install dependencies
+npm ci --legacy-peer-deps
 npm run serve         # Start development server on port 8000
+npm run verify        # Run asset, lint, format, and all test checks
 ```
 
 ### File Modification Guidelines
@@ -175,7 +181,8 @@ npm run serve         # Start development server on port 8000
 1. **Adding New Generators**: Edit `src/generators/perchance.js`
     - Add to `initializeDefaultGenerators()` method
     - Follow existing generator structure with weighted items
-    - Support nested generators using `[generatorName]` syntax
+    - Support nested `[generatorName]` references with an existing generator
+    - Keep outputs bounded; missing and cyclic references have diagnostics
 
 2. **Adding New Bosses**: Edit `src/core/gameState.js`
     - Add to `gameData.bosses` array in `initializeGameData()`
@@ -187,6 +194,7 @@ npm run serve         # Start development server on port 8000
     - Handle errors with fallback options
 
 4. **UI Changes**: Edit `index.html`, `styles/main.css`, `js/main.js`
+    - Use `src/services/cardSource.js` for card lookups
     - Test on multiple screen sizes
     - Verify keyboard navigation
     - Check color contrast
@@ -213,12 +221,12 @@ gameState.addObserver((state) => {
 
 ```javascript
 // Generate content from a generator
-const result = perchanceGenerator.generate('encounterType');
+const result = perchanceGenerator.generate('randomEncounter');
 
 // Add nested generator references
-this.addGenerator('quest', {
+this.addGenerator('questText', {
     weight: 1,
-    items: ['Retrieve the [magicalItem] from [location]', 'Defeat [enemyType] in [location]'],
+    items: ['Retrieve [questItem] from [questLocation]'],
 });
 ```
 
@@ -227,7 +235,7 @@ this.addGenerator('quest', {
 ```javascript
 // Always provide user-friendly error messages
 try {
-    const card = await scryfallAPI.getCardByName(cardName);
+    const card = await cardSource.getCardByName(cardName);
     return card;
 } catch (error) {
     console.error('Failed to fetch card:', error);

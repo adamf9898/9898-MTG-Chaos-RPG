@@ -1,33 +1,25 @@
-📜 MTG Chaos RPG: Feature Implementation Menu
+# MTG Chaos RPG: Feature Implementation Menu
 
-1. Game Architecture & State Management
-   A modern, modular approach to organizing game logic, data, and UI for scalability and maintainability.
+Use this menu to select one bounded feature for a reviewed pull request. Keep
+the feature categories intact; proposals below are not claims of implementation.
 
-2. Scryfall API Integration
-   Fetch Magic: The Gathering card data dynamically, enabling the addition of new cards, sets, or mechanics in real-time.
+1. **Game Architecture & State Management** - Improve modular state and browser UI integration.
 
-3. AI-Driven Encounters & Storytelling
-   Integrate AI for dynamic quests, procedural story beats, and NPC behavior, leveraging LLMs or custom logic.
+2. **Scryfall API Integration** - Use `src/services/cardSource.js` for cached online lookups and offline MTGJSON fallback.
 
-4. Multiplayer & Real-Time Collaboration
-   Real-time game state sharing, player chat, cooperative quests, and matchmaking.
+3. **AI-Driven Encounters & Storytelling** - Extend local personality-driven content or the existing provider interface.
 
-5. Custom Content System (Cards, Bosses, Quests)
-   Plug-in architecture for user-generated cards, custom bosses, and quests—allowing robust community expansion.
+4. **Multiplayer & Real-Time Collaboration** - Deferred: this static app has no authoritative multiplayer server or matchmaking.
 
-6. Frontend UI & Accessibility
-   Responsive, interactive, and accessible UI/UX, including board rendering, drag-and-drop cards, and ARIA practices.
+5. **Custom Content System (Cards, Bosses, Quests)** - Extend the existing data and generator APIs with real-module tests.
 
-7. DevOps, Testing & Continuous Deployment
-   Automated tests, GitHub Actions workflows, deployment to GitHub Pages, and collaboration tooling.
+6. **Frontend UI & Accessibility** - Maintain semantic HTML, keyboard access, responsive layout, and reduced-motion support.
 
-8. Documentation & Contribution Guidelines
-   Comprehensive onboarding, code commenting, and community contribution standards.
+7. **DevOps, Testing & Continuous Deployment** - Extend existing read-only audit and CI; do not add uncontrolled auto-edit loops.
 
-Instructions
-Click or expand any section header to view a detailed implementation guide.
-Each guide includes:
-Summary & rationale
-Step-by-step code snippets (with comments)
-Explanations of design choices
-Usage instructions for contributors
+8. **Documentation & Contribution Guidelines** - Keep commands, supported capabilities, and role handoffs aligned.
+
+For each iteration, analyze -> summarize -> plan -> implement -> test -> reflect
+-> document, then stop for human review. Use
+`.github/prompts/continuous-improvement.prompt.md` and
+`docs/continuous-improvement.md` for the checklist, roles, and report format.
