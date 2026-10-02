@@ -8,6 +8,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REPORT_DIR = path.join(ROOT, 'reports', 'generated');
 const REPORT_NAME = 'quality-audit';
 const CHECK_TIMEOUT_MS = 4 * 60 * 1000;
+const TERMINATION_GRACE_MS = 2000;
 const MAX_OUTPUT_CHARS = 20000;
 const PROJECT_ASSETS = [
     'package.json',
@@ -44,6 +45,11 @@ export function runProcess(command, args, { cwd = ROOT, timeoutMs = CHECK_TIMEOU
         let spawnError = null;
         let timedOut = false;
         let escalationTimer;
+        let closeResult = null;
+        let pendingTerminations = 0;
+        let settled = false;
+        let terminationDeadline;
+        const terminationProcesses = new Set();
 
         const child = spawn(command, args, {
             cwd,
@@ -52,6 +58,23 @@ export function runProcess(command, args, { cwd = ROOT, timeoutMs = CHECK_TIMEOU
             detached: process.platform !== 'win32',
             shell: false,
         });
+
+        const finish = () => {
+            if (settled || !closeResult || pendingTerminations > 0 || escalationTimer) {
+                return;
+            }
+            settled = true;
+            clearTimeout(timeout);
+            clearTimeout(terminationDeadline);
+            resolve({
+                exitCode: spawnError ? 127 : closeResult.exitCode,
+                signal: closeResult.signal,
+                timedOut,
+                error: spawnError?.message ?? null,
+                stdout,
+                stderr,
+            });
+        };
 
         child.stdout.on('data', (chunk) => {
             stdout = appendOutput(stdout, chunk);
@@ -68,6 +91,7 @@ export function runProcess(command, args, { cwd = ROOT, timeoutMs = CHECK_TIMEOU
                 return;
             }
             if (process.platform === 'win32') {
+                pendingTerminations += 1;
                 const args = ['/pid', String(child.pid), '/t'];
                 if (signal === 'SIGKILL') {
                     args.push('/f');
@@ -77,7 +101,22 @@ export function runProcess(command, args, { cwd = ROOT, timeoutMs = CHECK_TIMEOU
                     windowsHide: true,
                     shell: false,
                 });
-                killer.on('error', () => child.kill(signal));
+                terminationProcesses.add(killer);
+                let completed = false;
+                const completeTermination = (exitCode) => {
+                    if (completed || settled) {
+                        return;
+                    }
+                    completed = true;
+                    if (exitCode !== 0) {
+                        child.kill(signal);
+                    }
+                    terminationProcesses.delete(killer);
+                    pendingTerminations -= 1;
+                    finish();
+                };
+                killer.on('error', () => completeTermination(1));
+                killer.on('close', completeTermination);
                 return;
             }
             try {
@@ -91,22 +130,33 @@ export function runProcess(command, args, { cwd = ROOT, timeoutMs = CHECK_TIMEOU
             timedOut = true;
             signalProcessTree('SIGTERM');
             escalationTimer = setTimeout(() => {
+                escalationTimer = null;
                 signalProcessTree('SIGKILL');
+                finish();
             }, 1000);
-            escalationTimer.unref();
+            terminationDeadline = setTimeout(() => {
+                if (!closeResult || pendingTerminations > 0 || escalationTimer) {
+                    for (const terminationProcess of terminationProcesses) {
+                        terminationProcess.kill('SIGKILL');
+                        terminationProcess.unref();
+                    }
+                    terminationProcesses.clear();
+                    child.kill('SIGKILL');
+                    child.stdout.destroy();
+                    child.stderr.destroy();
+                    child.unref();
+                    pendingTerminations = 0;
+                    escalationTimer = null;
+                    closeResult ??= { exitCode: null, signal: 'SIGKILL' };
+                    finish();
+                }
+            }, TERMINATION_GRACE_MS);
         }, timeoutMs);
 
         child.on('close', (exitCode, signal) => {
             clearTimeout(timeout);
-            clearTimeout(escalationTimer);
-            resolve({
-                exitCode: spawnError ? 127 : exitCode,
-                signal,
-                timedOut,
-                error: spawnError?.message ?? null,
-                stdout,
-                stderr,
-            });
+            closeResult = { exitCode, signal };
+            finish();
         });
     });
 }

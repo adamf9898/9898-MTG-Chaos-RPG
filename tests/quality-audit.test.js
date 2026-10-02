@@ -38,7 +38,7 @@ test('reports nonzero exits and kills timed-out checks', async () => {
         cwd: ROOT,
         timeoutMs: 2000,
     });
-    const timedOut = await runProcess(process.execPath, [path.join(FIXTURES, 'hang.js')], {
+    const timedOut = await runProcess(process.execPath, [path.join(FIXTURES, 'spawn-hang.js')], {
         cwd: ROOT,
         timeoutMs: 100,
     });
