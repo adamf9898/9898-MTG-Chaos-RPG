@@ -7,10 +7,11 @@ This file provides context and guidelines for GitHub Copilot and other AI agents
 ## Quick-Start Commands
 
 ```bash
-npm install --legacy-peer-deps  # Install all dependencies
+npm ci --legacy-peer-deps       # Install locked dependencies
 npm run serve                   # Dev server → http://localhost:8000
-npm test                        # Run test suite (node:test)
-npm run lint                    # ESLint check
+npm test                        # Run all Node.js test files
+npm run verify                  # Assets + lint + format + tests, with reports
+npm run lint                    # ESLint check only
 npm run lint:fix                # ESLint auto-fix
 npm run format                  # Prettier format all files
 npm run format:check            # Prettier check (CI)
@@ -38,7 +39,7 @@ npm run format:check            # Prettier check (CI)
 | -------------- | ----------------------------------------------------------------- |
 | Language       | Vanilla JavaScript ES6+ (no framework)                            |
 | Module System  | ES6 modules (`type: "module"`)                                    |
-| Runtime        | Browser + Node 20 for dev/test/tools                              |
+| Runtime        | Browser + Node 22.22.1+ for dev/test/tools                        |
 | Styling        | Modern CSS (Grid, Flexbox, Custom Properties)                     |
 | Card Data      | Scryfall API (online) / MTGJSON (offline cache)                   |
 | Procedural Gen | Perchance-compatible generator (`src/generators/perchance.js`)    |
@@ -80,7 +81,9 @@ js/
 └── main.js                   # Main UI controller
 
 tests/
-└── core.test.js              # Test suite (node:test)
+├── core.test.js              # Existing structural tests
+├── production.test.js        # Production-module regressions
+└── quality-audit.test.js     # Audit runner tests
 
 tools/
 ├── fetch-mtgjson.js          # Fetch & cache MTGJSON bulk data
@@ -143,6 +146,11 @@ data/
 
 ## API Guidelines
 
+### Card lookup
+
+- UI and game features use `src/services/cardSource.js`, not `scryfallAPI` directly.
+- The adapter selects Scryfall or the MTGJSON offline provider and normalizes searches to arrays.
+
 ### Scryfall
 
 - Respect 10 req/s limit → always call `await this.rateLimit()` before requests
@@ -170,10 +178,14 @@ npm test            # Run all tests
 node --test tests/  # Same via Node directly
 ```
 
-- All tests live in `tests/core.test.js`; use `node:test` + `node:assert`
+- Tests live under `tests/`; use `node:test` + `node:assert`
 - Mock external dependencies (never make live API calls in tests)
 - Test both success and error/fallback paths
 - Descriptive test names: `'Boss health reaches 0 when damage equals maxHealth'`
+- Run `npm run verify` for bounded asset, lint, format, and full test checks.
+
+See [`docs/continuous-improvement.md`](../docs/continuous-improvement.md) for
+role handoffs, the finite iteration process, and report format.
 
 ---
 

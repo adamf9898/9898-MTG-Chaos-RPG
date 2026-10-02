@@ -9,11 +9,14 @@ For detailed Copilot instructions see `.github/copilot-instructions.md`.
 ## Environment Setup
 
 ```bash
-# Always run these first
-npm install --legacy-peer-deps
-npm test       # verify baseline passes
-npm run lint   # verify no existing lint errors
+# Use the checked-in Node version and lockfile
+npm ci --legacy-peer-deps
+npm run verify
 ```
+
+`npm run verify` checks configured project assets, lint, formatting, and every
+test under `tests/`. It writes ignored local reports to `reports/generated/`;
+CI uploads the same reports as artifacts.
 
 ---
 
@@ -27,8 +30,8 @@ npm run lint   # verify no existing lint errors
 
 1. Read `src/core/gameState.js` to understand the boss schema
 2. Add the boss object to `gameData.bosses[]` in `initializeGameData()`
-3. Add a test in `tests/core.test.js`
-4. Run `npm test` to confirm passing
+3. Add a regression test under `tests/`
+4. Run `npm run verify` to confirm passing
 
 **Files to edit**: `src/core/gameState.js`, `tests/core.test.js`
 
@@ -43,7 +46,7 @@ npm run lint   # verify no existing lint errors
 1. Read `src/generators/perchance.js` to understand existing generators
 2. Add to `initializeDefaultGenerators()` using `this.addGenerator()`
 3. Test with `perchanceGenerator.generate('yourGenerator')`
-4. Add test in `tests/core.test.js`
+4. Add a regression test under `tests/`
 
 **Files to edit**: `src/generators/perchance.js`, `tests/core.test.js`
 
@@ -120,9 +123,16 @@ This downloads the MTGJSON `AtomicCards.json` bulk file to `data/mtgjson/`. Run 
 ## Testing Rules for Agents
 
 - Never make live network requests in tests — mock all APIs
-- Run `npm test` before and after every change
-- Run `npm run lint` before submitting
+- Run `npm test` and `npm run verify` before submitting
 - All new features need at least one test
+- Include exact command results and distinguish existing failures from regressions
+
+## Continuous Improvement Cycle
+
+Use the finite analyze -> summarize -> plan -> implement -> test -> reflect ->
+document sequence in [`docs/continuous-improvement.md`](docs/continuous-improvement.md).
+Each pull request is one bounded iteration. A human reviews the evidence and
+approves the next iteration; scheduled audits do not edit or merge code.
 
 ## Commit Format (Conventional Commits)
 
@@ -148,5 +158,5 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`
 | Card source (unified) | `src/services/cardSource.js`  |
 | League                | `src/league/`                 |
 | UI controller         | `js/main.js`                  |
-| Tests                 | `tests/core.test.js`          |
+| Tests                 | `tests/`                      |
 | Data tools            | `tools/`                      |

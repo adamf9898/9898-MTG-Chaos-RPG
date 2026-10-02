@@ -3,7 +3,7 @@
  * Orchestrates the game components and handles UI interactions
  */
 
-import scryfallAPI from '../src/api/scryfall.js';
+import cardSource from '../src/services/cardSource.js';
 import perchanceGenerator from '../src/generators/perchance.js';
 import gameState from '../src/core/gameState.js';
 import aiService from '../src/ai/aiService.js';
@@ -224,16 +224,15 @@ class MTGChaosRPG {
     async drawInitialHand() {
         try {
             // Get some basic cards for the starting hand
-            const playerCards = await scryfallAPI.searchCards(
+            const playerCards = await cardSource.searchCards(
                 'cmc<=3 type:creature OR type:instant OR type:sorcery'
             );
 
-            if (playerCards.data && playerCards.data.length > 0) {
+            if (playerCards.length > 0) {
                 // Add 5 random cards to hand
                 const handSize = 5;
-                for (let i = 0; i < handSize && i < playerCards.data.length; i++) {
-                    const randomCard =
-                        playerCards.data[Math.floor(Math.random() * playerCards.data.length)];
+                for (let i = 0; i < handSize && i < playerCards.length; i++) {
+                    const randomCard = playerCards[Math.floor(Math.random() * playerCards.length)];
                     gameState.addCardToHand('player-1', {
                         id: `card-${Date.now()}-${i}`,
                         scryfallId: randomCard.id,
@@ -390,7 +389,7 @@ class MTGChaosRPG {
             this.showLoading('Drawing card...');
 
             // Get a random card from Scryfall
-            const randomCard = await scryfallAPI.getRandomCard('cmc<=6');
+            const randomCard = await cardSource.getRandomCard('cmc<=6');
 
             if (randomCard) {
                 gameState.addCardToHand('player-1', {
@@ -961,7 +960,7 @@ class MTGChaosRPG {
             this.showLoading('Generating booster pack...');
 
             // Use Scryfall API to get random cards
-            const cards = await scryfallAPI.getRandomCards(15); // Standard booster size
+            const cards = await cardSource.getRandomCards(15); // Standard booster size
 
             let boosterHtml =
                 '<div class="booster-pack"><h4>Generated Booster Pack</h4><div class="card-grid">';

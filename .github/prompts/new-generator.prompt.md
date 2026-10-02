@@ -1,13 +1,16 @@
 # Prompt: Add a New Generator or Encounter
 
-Add a new Perchance-compatible content generator to the 9898-MTG Chaos RPG.
+Add a generator to the repository's JavaScript Perchance-style content system.
+It supports list selection and `[generatorName]` references, not the full
+Perchance.org language, plugins, or runtime.
 
 ## Context
 
 - Generators live in `src/generators/perchance.js` → `initializeDefaultGenerators()`
 - Use the `addGenerator(name, generator)` method
 - Nested references use `[generatorName]` syntax
-- Existing generators: `encounterType`, `location`, `enemy`, `reward`, `quest`, `magicalItem`, `environment`, `special`, `encounterTitle`
+- Existing generators are registered in `initializeDefaultGenerators()` and
+  `initializeExtendedGenerators()` in `src/generators/perchance.js`.
 
 ## Generator Schema
 
@@ -29,11 +32,15 @@ this.addGenerator('myGenerator', {
 3. Use nested `[generatorName]` references to existing generators for variety
 4. Consider the MTG chaos-RPG theme: planar travel, magical mishaps, legendary creatures
 5. Test the generator output with `perchanceGenerator.generate('myGenerator')`
-6. Add a test case in `tests/core.test.js`
+6. Add production-module regression coverage under `tests/`
+7. Ensure every new nested reference exists; missing references are preserved
+   and reported in `lastDiagnostics`, while cycles/depth are bounded.
+8. Run `npm run verify`
 
 ## Encounter Generator Instructions
 
-For a full encounter, update `generateEncounter()` in `perchance.js` to use your new generator categories.
+For a complete encounter, update `generateCompleteEncounter()` in
+`perchance.js` to use your new generator categories.
 
 Encounter structure:
 
@@ -69,5 +76,5 @@ this.addGenerator('planarEvent', {
 - [ ] Unique generator name (no collision with existing names)
 - [ ] At least 8 items
 - [ ] Nested references use valid existing generator names
-- [ ] Test added in `tests/core.test.js`
-- [ ] `npm test` passes
+- [ ] Regression test added under `tests/`
+- [ ] `npm run verify` passes

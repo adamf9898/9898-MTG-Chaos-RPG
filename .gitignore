@@ -137,3 +137,7 @@ out/
 data/mtgjson/AtomicCards.json
 data/mtgjson/AllCards.json
 data/mtgjson/AllPrintings.json
+
+# Local quality-audit output (CI uploads these as workflow artifacts)
+reports/generated/quality-audit.json
+reports/generated/quality-audit.md

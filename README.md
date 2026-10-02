@@ -69,7 +69,7 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 ### Prerequisites
 
 - Modern web browser with ES6 module support
-- Node.js 18+ (for development)
+- Node.js 22.22.1 or higher (see `.nvmrc`)
 - Internet connection (for Scryfall API, optional)
 
 ### Installation
@@ -84,7 +84,7 @@ A comprehensive Magic: The Gathering Chaos RPG implementation featuring cooperat
 2. **Install dependencies**:
 
     ```bash
-    npm install
+    npm ci --legacy-peer-deps
     ```
 
 3. **Start development server**:
@@ -211,8 +211,17 @@ src/
 │   └── gameState.js         # Game state management
 ├── generators/
 │   └── perchance.js         # Content generators
-└── ui/
-    └── main.js              # UI controller
+└── services/
+    ├── cardSource.js        # Scryfall / MTGJSON adapter used by the UI
+    └── mtgjson.js           # Offline card provider
+js/
+└── main.js                  # UI controller
+tests/
+├── core.test.js             # Existing structural tests
+├── production.test.js       # Production-module regression coverage
+└── quality-audit.test.js    # Audit runner tests
+tools/
+└── quality-audit.js         # Bounded verification and reports
 ```
 
 ## 🧪 Testing
@@ -220,20 +229,15 @@ src/
 ### Running Tests
 
 ```bash
-npm test
+npm test                 # Run every Node.js test file under tests/
+npm run verify           # Run lint, formatting, tests, and project-asset checks
 ```
 
-### Test Coverage
-
-- ✅ Game State Management
-- ✅ Perchance Generator Logic
-- ✅ Scryfall API Integration
-- ✅ AI Service Integration
-- ✅ Boss Battle Mechanics
-- ✅ Player Management
-- ✅ Encounter Generation
-- ✅ Quest System
-- ✅ Inventory Management
+Tests include legacy structural assertions and deterministic tests against real
+generator, card-source, and AI modules. No tests make live network requests.
+The verification command writes `reports/generated/quality-audit.json` and
+`reports/generated/quality-audit.md`; these local reports are ignored by Git
+and CI preserves them as workflow artifacts.
 
 ## 🤝 Contributing
 
